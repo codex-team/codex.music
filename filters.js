@@ -28,6 +28,26 @@ class Gains {
 }
 
 /**
+ * @ class ChannelMerger
+ * @ channel aggregation
+ */
+class ChannelMerger {
+
+  ChannelMerger() {
+    /**
+     * template's channelMerger
+     * @context - audioContext
+     * @options - personal settings
+     * @type {ChannelMergerNode}
+     */
+    const mergerNode = new ChannelMergerNode(context, options);
+  }
+
+
+}
+
+
+/**
  * @ Delay
  * @ Class create a new filter(delay).This module allows you to delay the sound for a certain time.
  */
