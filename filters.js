@@ -2,7 +2,7 @@
  * @ allFiltrers
  * @ Class create filters
  */
-class oneFilters {
+class Filters {
   createGain() {
     /**
      * Create a  gain filter.
@@ -26,13 +26,6 @@ class oneFilters {
     delayNode.connect(destination);
     source.start(0);
   }
-}
-
-/**
- * @ Filters
- * @ Class create a new filter(filters).
- */
-class twoFilters {
   createHighPass() {
     /**
      * high-pass filter (cuts off anything below the selected frequency)
