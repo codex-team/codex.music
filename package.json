@@ -1,7 +1,7 @@
 {
   "name": "codex.music",
   "version": "0.0.1",
-  "description": "",
+  "description": "Audio synthesis",
   "main": "dist/bundle.min.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -11,8 +11,15 @@
     "type": "git",
     "url": "git+https://github.com/codex-team/codex.music.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "audio",
+    "synthesis",
+    "CodeX",
+    "codex-team",
+    "chillout",
+    "music"
+  ],
+  "author": "CodeX",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/codex-team/codex.music/issues"
