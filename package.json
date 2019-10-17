@@ -4,8 +4,7 @@
   "description": "",
   "main": "dist/bundle.min.js",
   "scripts": {
-    "lint": "eslint --fix src/*",
-    "build": "yarn lint && webpack --mode production",
+    "build": "webpack --mode production",
     "compile-and-run": "yarn build && node dist/bundle.min.js"
   },
   "repository": {
@@ -26,6 +25,7 @@
     "eslint": "^6.5.1",
     "eslint-config-codex": "github:codex-team/eslint-config",
     "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.2",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"

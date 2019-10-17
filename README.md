@@ -4,4 +4,4 @@
 `yarn install --frozen-lockfile`
 
 # run
-`yarn run-project`
+`yarn compile-and-run`

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "typeRoots" : ["./types"],
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": [
+      "es2015",
+      "es2017",
+      "dom"
+    ],
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "allowSyntheticDefaultImports": false,
+    "jsx": "react",
+    "allowJs": true,
+    "baseUrl": "./",
+    "paths": {
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
