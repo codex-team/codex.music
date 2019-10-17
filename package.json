@@ -5,7 +5,7 @@
   "main": "dist/bundle.min.js",
   "scripts": {
     "build": "webpack --mode production",
-    "compile-and-run": "yarn build && node dist/bundle.min.js"
+    "dev": "webpack --mode development -w"
   },
   "repository": {
     "type": "git",
