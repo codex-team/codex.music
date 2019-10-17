@@ -1,57 +1,29 @@
 /**
- * @ gains
- * @ Class create a new filter(gain).The module allows you to change the sound signal level.
+ * @ allFiltrers
+ * @ Class create filters
  */
-class Gains {
-  createNode() {
+class oneFilters {
+  createGain() {
     /**
-     * Create a node.
+     * Create a  gain filter.
+     * Class create a new filter(gain).The module allows you to change the sound signal level.
      */
     const gainNode = context.createGain();
     gainNode.gain.value = 0.4;
-  }
-
-  addSourseGain() {
-    /**
-     * add a sourse for gain.
-     */
     source.connect(gainNode);
     gainNode.connect(destination);
-  }
-
-  startSourceGain() {
-    /**
-     * start a source gain.
-     */
     source.start(0);
   }
-}
 
-/**
- * @ Delay
- * @ Class create a new filter(delay).This module allows you to delay the sound for a certain time.
- */
-class Delay {
   createDelay() {
     /**
      * Create a delay and set time.
+     * Class create a new filter(delay).This module allows you to delay the sound for a certain time.
      */
     const delayNode = context.createDelay();
     delayNode.delayTime.value = 2;
-  }
-
-  addSourceDelay() {
-    /**
-     * add a source for Delay.
-     */
     source.connect(delayNode);
     delayNode.connect(destination);
-  }
-
-  startSourceDelay() {
-    /**
-     * start a source delay.
-     */
     source.start(0);
   }
 }
@@ -60,7 +32,7 @@ class Delay {
  * @ Filters
  * @ Class create a new filter(filters).
  */
-class Filters {
+class twoFilters {
   createHighPass() {
     /**
      * high-pass filter (cuts off anything below the selected frequency)
@@ -142,41 +114,3 @@ class Filters {
     allPassNode.frequency.Q = 3;
   }
 }
-
-/**
- * @ class ChannelMerger
- * @ channel aggregation
- */
-class ChannelMerger {
-
-  ChannelMerger() {
-    /**
-     * template's channelMerger
-     * @context - audioContext
-     * @options - personal settings
-     * @type {ChannelMergerNode}
-     */
-    const mergerNode = new ChannelMergerNode(context, options);
-  }
-
-
-}
-
-/**
- * @ class ChannelSplitter
- * @ channel separation
- */
-class ChannelSplitter {
-
-  ChannelSplitter() {
-    /**
-     * template's channelSplitter
-     * @context - audioContext
-     * @options - personal settings
-     * @type {ChannelSplitterNode}
-     */
-    const splitterNode = new ChannelSplitterNode(context, options);
-  }
-}
-
-
