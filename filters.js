@@ -8,9 +8,9 @@ class Gains {
     gainNode.gain.value = 0.4;
   }
 
-  addSourse() {
+  addSourseGain() {
     /**
-     * add a sourse.
+     * add a sourse for gain.
      */
     source.connect(gainNode);
     gainNode.connect(destination);
@@ -34,9 +34,9 @@ class Delay {
     delayNode.delayTime.value = 2;
   }
 
-  addSourseDelay() {
+  addSourceDelay() {
     /**
-     * add a sourse for Delay.
+     * add a source for Delay.
      */
     source.connect(delayNode);
     delayNode.connect(destination);
