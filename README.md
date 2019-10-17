@@ -1,7 +1,7 @@
 # codex.music
 
-# install dependencies
+### install dependencies
 `yarn install --frozen-lockfile`
 
-# run
-`yarn compile-and-run`
+### for local development use
+`yarn dev`
