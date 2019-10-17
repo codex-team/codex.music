@@ -1,5 +1,3 @@
-let message: string
+const message = 'hello world!';
 
-message = "hello world!"
-
-console.log(message)
+console.log(message);

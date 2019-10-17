@@ -1,13 +1,12 @@
 {
   "name": "codex.music",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/bundle.min.js",
   "scripts": {
-    "lint": "tslint 'src/**/*.ts'",
-    "prettier": "prettier --config ./.prettierrc --write 'src/**/*.ts'",
-    "build": "yarn lint && yarn prettier && webpack --mode production",
-    "run-project": "yarn build && node dist/bundle.min.js"
+    "lint": "eslint --fix src/*",
+    "build": "yarn lint && webpack --mode production",
+    "compile-and-run": "yarn build && node dist/bundle.min.js"
   },
   "repository": {
     "type": "git",
@@ -15,17 +14,18 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/codex-team/codex.music/issues"
   },
   "homepage": "https://github.com/codex-team/codex.music#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.4.0",
     "awesome-typescript-loader": "^5.2.1",
-    "prettier": "1.18.2",
-    "tslint": "^5.20.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-config-standard": "^8.0.1",
+    "eslint": "^6.5.1",
+    "eslint-config-codex": "github:codex-team/eslint-config",
+    "eslint-config-standard": "^14.1.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
