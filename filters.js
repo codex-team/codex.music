@@ -28,26 +28,6 @@ class Gains {
 }
 
 /**
- * @ class ChannelMerger
- * @ channel aggregation
- */
-class ChannelMerger {
-
-  ChannelMerger() {
-    /**
-     * template's channelMerger
-     * @context - audioContext
-     * @options - personal settings
-     * @type {ChannelMergerNode}
-     */
-    const mergerNode = new ChannelMergerNode(context, options);
-  }
-
-
-}
-
-
-/**
  * @ Delay
  * @ Class create a new filter(delay).This module allows you to delay the sound for a certain time.
  */
@@ -162,3 +142,41 @@ class Filters {
     allPassNode.frequency.Q = 3;
   }
 }
+
+/**
+ * @ class ChannelMerger
+ * @ channel aggregation
+ */
+class ChannelMerger {
+
+  ChannelMerger() {
+    /**
+     * template's channelMerger
+     * @context - audioContext
+     * @options - personal settings
+     * @type {ChannelMergerNode}
+     */
+    const mergerNode = new ChannelMergerNode(context, options);
+  }
+
+
+}
+
+/**
+ * @ class ChannelSplitter
+ * @ channel separation
+ */
+class ChannelSplitter {
+
+  ChannelSplitter() {
+    /**
+     * template's channelSplitter
+     * @context - audioContext
+     * @options - personal settings
+     * @type {ChannelSplitterNode}
+     */
+    const splitterNode = new ChannelSplitterNode(context, options);
+  }
+}
+
+
