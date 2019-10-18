@@ -46,6 +46,14 @@ export class Melody {
   }
 
   /**
+   * Setter for melody default length
+   * @param {Number} defaultLength - default note length
+   */
+  setDefaultLength(defaultLength: number) {
+    this.defaultLength = defaultLength;
+  }
+
+  /**
    * Parse string to noteList
    * @param {String} notes - string with melody notes
    * @return {Array}
