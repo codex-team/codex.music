@@ -1,18 +1,30 @@
-/**
- *  Class representing an AudioContextManager
+  /**
+ * @typedef {object} AudioContextConfig
+ * @property {object} AudioContext - part of a melody
  */
-class AudioContextManager {
 
-	private _contex: AudioContex;
+
+/**
+ *Checking or creating audio
+*/
+class AudioContextManager.ts {
 	
 	/**
-	 *  Create AudioContext
-	 * @returns {AudioContext} _context field
+	 * @param  {AudioContextConfig} settings - melody configuration obj
+	 */
+	constructor(settings) {
+		private _context: AudioContext;
+	}
+	
+	/**
+	 * Crearing an AdioContex if it is true
+	 * @retuts {AudioContext} this._context
 	 */
 	get context() {
-		if (this._contex == undefined) this._context = new AudioContext;
+		if (this._context == undefined) 
+			{this._context = new AudioContext};
 		return this._context;
 	}
 }
 
-export default new AudioContextManager();
+export default new AudioContextManager.ts();
