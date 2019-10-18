@@ -33,7 +33,7 @@ export class Melody {
   public noteList: MelodyNote[];
 
   /**
-   * Default note length
+   * Default note length in milliseconds
    */
   private defaultLength = 300;
 
@@ -47,18 +47,18 @@ export class Melody {
 
   /**
    * Setter for melody default length
-   * @param {Number} defaultLength - default note length
+   * @param {Number} defaultLength - default note length in milliseconds
    */
-  setDefaultLength(defaultLength: number) {
+  public setDefaultLength(defaultLength: number): void {
     this.defaultLength = defaultLength;
   }
 
   /**
    * Parse string to noteList
    * @param {String} notes - string with melody notes
-   * @return {Array}
+   * @return {MelodyNote[]}
    */
-  parseNoteList(notes: string) {
+  private parseNoteList(notes: string): MelodyNote[] {
     const noteList: MelodyNote[] = [];
 
     notes.split(' ').map((note: string) => {
@@ -126,7 +126,7 @@ export class Melody {
    * @param {String} note - new note (like A4)
    * @return {Number} frequency - frequency of note
    */
-  static getFrequency(note: string) {
+  private static getFrequency(note: string): number {
     let noteColumn = 0;
 
     const noteRow = +note[1];
