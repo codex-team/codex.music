@@ -1,4 +1,6 @@
 import noteFrequencies from '../utils/noteFrequencies';
+import noteValidation from '../utils/noteValidation';
+import { ValidationError } from '../utils/error/validationError';
 
 /**
  * Interface of note in melody noteList
@@ -53,6 +55,10 @@ export class Melody {
 
     notes.split(' ').map((note: string) => {
       let noteObject: MelodyNote;
+
+      if (!noteValidation(note)) {
+        throw new ValidationError(`Parse error note '${note}'`);
+      }
 
       // Parse pause in melody (like '.' or '.x2')
       if (note.length === 1 && note === '.') {
