@@ -13,16 +13,17 @@ module.exports = {
     rules: [
       {
         test: /\.ts?$/,
+        exclude: /node_modules/,
         use: [
+          {
+            loader: 'awesome-typescript-loader'
+          },
           {
             loader: 'eslint-loader',
             options: {
               fix: true
             }
           },
-          {
-            loader: 'awesome-typescript-loader'
-          }
         ]
       }
     ]
