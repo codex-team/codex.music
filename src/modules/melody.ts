@@ -1,4 +1,3 @@
-import noteFrequencies from '../utils/noteFrequencies';
 import noteValidation from '../utils/noteValidation';
 import { ValidationError } from '../utils/error/validationError';
 
@@ -127,39 +126,39 @@ export class Melody {
    * @return {Number} frequency - frequency of note
    */
   private static getFrequency(note: string): number {
-    let noteColumn = 0;
+    let noteInOctave: number = 0;
 
-    const noteRow = +note[1];
+    const octave: number = +note[1] + 1;
 
     switch (note[0]) {
       case 'C':
-        noteColumn = 0;
+        noteInOctave = 1;
         break;
       case 'D':
-        noteColumn = 1;
+        noteInOctave = 3;
         break;
       case 'E':
-        noteColumn = 2;
+        noteInOctave = 5;
         break;
       case 'F':
-        noteColumn = 3;
+        noteInOctave = 6;
         break;
       case 'G':
-        noteColumn = 4;
+        noteInOctave = 8;
         break;
       case 'A':
-        noteColumn = 5;
+        noteInOctave = 10;
         break;
       case 'B':
-        noteColumn = 6;
+        noteInOctave = 12;
         break;
     }
 
-    // If note with sharp, return frequency multiplied by two to the power of 1/12
+    // Finds the frequency of note using the formula
     if (note[2] === '#') {
-      return noteFrequencies[noteRow][noteColumn] * Math.pow(2, 1 / 12);
+      return 440 * Math.pow(2, ((noteInOctave + (octave * 12) + 1) - 70) / 12);
     } else {
-      return noteFrequencies[noteRow][noteColumn];
+      return 440 * Math.pow(2, ((noteInOctave + (octave * 12)) - 70) / 12);
     }
   }
 }
