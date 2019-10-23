@@ -67,45 +67,31 @@ export class Melody {
         throw new ValidationError(`Parse error note '${note}'`);
       }
 
+      const [noteCode, length] = note.split('x');
+
       /**
        * Parse pause in melody (like '.' or '.x2')
        */
-      if (/^.(x\d+)?$/.test(note)) {
+      if (noteCode === '.') {
         noteObject = {
           note: 'pause',
           frequency: 0.0,
-          length: (+/^.(x(\d+))?$/.exec(note)[2] || 1) * this.defaultLength
+          length: (+length || 1) * this.defaultLength
         };
         noteList.push(noteObject);
         return note;
-      }
-
-      /**
-       * Parse note like 'A4' or 'A4x2'
-       */
-      if (/^[A-G][0-8](x\d+)?$/.test(note)) {
+      } else {
+        /**
+         * Parse note like 'A4', 'A4x2', 'A4#' or 'A4#x6'
+         */
         noteObject = {
-          note: /^([A-G][0-8])(x\d+)?$/.exec(note)[1],
-          frequency: Melody.getFrequency(note),
-          length: (+/^[A-G][0-8](x(\d+))?$/.exec(note)[2] || 1) * this.defaultLength
+          note: noteCode,
+          frequency: Melody.getFrequency(noteCode),
+          length: (+length || 1) * this.defaultLength
         };
         noteList.push(noteObject);
         return note;
       }
-
-      /**
-       * Parse note like 'A4#' or 'A4#x3'
-       */
-      if (/^[A-G][0-8]#(x\d+)?$/.test(note)) {
-        noteObject = {
-          note: /^([A-G][0-8]#)(x\d+)?$/.exec(note)[1],
-          frequency: Melody.getFrequency(note),
-          length: (+/^[A-G][0-8]#(x(\d+))?$/.exec(note)[2] || 1) * this.defaultLength
-        };
-        noteList.push(noteObject);
-        return note;
-      }
-      return note;
     });
     return noteList;
   }
