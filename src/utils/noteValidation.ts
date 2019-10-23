@@ -6,6 +6,8 @@
 export default function (note: string): boolean {
   return /^[A-G][0-8]$/.test(note) || // note like 'E3'
     /^[A-G][0-8]x\d+$/.test(note) || // note like 'G7x2'
+    /^[A-G][0-8]#$/.test(note) || // note like 'A4#'
+    /^[A-G][0-8]#x\d+$/.test(note) || // note like 'B2#x3'
     /^.$/.test(note) || // note like '.'
     /^.x\d+$/.test(note) || // note like '.x4'
     false;
