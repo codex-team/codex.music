@@ -67,50 +67,40 @@ export class Melody {
         throw new ValidationError(`Parse error note '${note}'`);
       }
 
-      // Parse pause in melody (like '.' or '.x2')
-      if (note.length === 1 && note === '.') {
+      /**
+       * Parse pause in melody (like '.' or '.x2')
+       */
+      if (/^.(x\d+)?$/.test(note)) {
         noteObject = {
           note: 'pause',
           frequency: 0.0,
-          length: this.defaultLength
-        };
-        noteList.push(noteObject);
-        return note;
-      } else if (note.length === 3 && note[0] === '.') {
-        noteObject = {
-          note: 'pause',
-          frequency: 0.0,
-          length: +note[2] * this.defaultLength
+          length: (+/^.(x(\d+))?$/.exec(note)[2] || 1) * this.defaultLength
         };
         noteList.push(noteObject);
         return note;
       }
 
-      // Parse note like 'A4' or 'A4#'
-      if (note.length === 2 || note.length === 3) {
+      /**
+       * Parse note like 'A4' or 'A4x2'
+       */
+      if (/^[A-G][0-8](x\d+)?$/.test(note)) {
         noteObject = {
-          note,
+          note: /^([A-G][0-8])(x\d+)?$/.exec(note)[1],
           frequency: Melody.getFrequency(note),
-          length: this.defaultLength
+          length: (+/^[A-G][0-8](x(\d+))?$/.exec(note)[2] || 1) * this.defaultLength
         };
         noteList.push(noteObject);
         return note;
       }
 
-      // Parse note like 'A4x2' or 'A4#x3'
-      if (note.length === 4) {
+      /**
+       * Parse note like 'A4#' or 'A4#x3'
+       */
+      if (/^[A-G][0-8]#(x\d+)?$/.test(note)) {
         noteObject = {
-          note: note.slice(0, 2),
+          note: /^([A-G][0-8]#)(x\d+)?$/.exec(note)[1],
           frequency: Melody.getFrequency(note),
-          length: +note[3] * this.defaultLength
-        };
-        noteList.push(noteObject);
-        return note;
-      } else if (note.length === 5) {
-        noteObject = {
-          note: note.slice(0, 3),
-          frequency: Melody.getFrequency(note),
-          length: +note[4] * this.defaultLength
+          length: (+/^[A-G][0-8]#(x(\d+))?$/.exec(note)[2] || 1) * this.defaultLength
         };
         noteList.push(noteObject);
         return note;
