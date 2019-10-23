@@ -80,18 +80,18 @@ export class Melody {
         };
         noteList.push(noteObject);
         return note;
-      } else {
-        /**
-         * Parse note like 'A4', 'A4x2', 'A4#' or 'A4#x6'
-         */
-        noteObject = {
-          note: noteCode,
-          frequency: Melody.getFrequency(noteCode),
-          length: (+length || 1) * this.defaultLength
-        };
-        noteList.push(noteObject);
-        return note;
       }
+
+      /**
+       * Parse note like 'A4', 'A4x2', 'A4#' or 'A4#x6'
+       */
+      noteObject = {
+        note: noteCode,
+        frequency: Melody.getFrequency(noteCode),
+        length: (+length || 1) * this.defaultLength
+      };
+      noteList.push(noteObject);
+      return note;
     });
     return noteList;
   }
