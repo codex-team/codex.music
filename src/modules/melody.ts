@@ -11,12 +11,12 @@ interface MelodyNote {
   note: string;
 
   /**
-   * Frequency of note
+   * Frequency of note in hertz
    */
   frequency: number;
 
   /**
-   * Length of note
+   * Length of note in milliseconds
    */
   length: number;
 }
@@ -97,9 +97,9 @@ export class Melody {
   }
 
   /**
-   * Get frequency of note
+   * Get frequency of note in hertz
    * @param {String} note - new note (like A4)
-   * @return {Number} frequency - frequency of note
+   * @return {Number} frequency - frequency of note in hertz
    */
   private static getFrequency(note: string): number {
     let noteInOctave: number = 0;
@@ -130,7 +130,9 @@ export class Melody {
         break;
     }
 
-    // Finds the frequency of note using the formula
+    /**
+     * Finds the frequency of note using the formula
+     */
     if (note[2] === '#') {
       return 440 * Math.pow(2, ((noteInOctave + (octave * 12) + 1) - 70) / 12);
     } else {
