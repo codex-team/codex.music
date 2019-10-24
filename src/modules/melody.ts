@@ -1,12 +1,12 @@
 import noteValidation from '../utils/noteValidation';
-import { ValidationError } from '../utils/error/validationError';
+import { ValidationError } from '../errors/validationError';
 
 /**
  * Interface of note in melody noteList
  */
 interface MelodyNote {
   /**
-   * Note name
+   * Note name (e.g. 'A4', 'C3#')
    */
   note: string;
 
@@ -19,6 +19,19 @@ interface MelodyNote {
    * Length of note in milliseconds
    */
   length: number;
+}
+
+/**
+ * Name of notes and their indexes in octave
+ */
+enum NoteNames {
+  C = 1,
+  D = 3,
+  E = 5,
+  F = 6,
+  G = 8,
+  A = 10,
+  B = 12
 }
 
 /**
@@ -97,46 +110,28 @@ export class Melody {
   }
 
   /**
-   * Get frequency of note in hertz
+   * Get frequency of note in hertz using the formula
    * @param {String} note - new note (like A4)
    * @return {Number} frequency - frequency of note in hertz
    */
   private static getFrequency(note: string): number {
-    let noteInOctave: number = 0;
+    const noteInOctave: number = NoteNames[note[0]];
 
     const octave: number = +note[1] + 1;
 
-    switch (note[0]) {
-      case 'C':
-        noteInOctave = 1;
-        break;
-      case 'D':
-        noteInOctave = 3;
-        break;
-      case 'E':
-        noteInOctave = 5;
-        break;
-      case 'F':
-        noteInOctave = 6;
-        break;
-      case 'G':
-        noteInOctave = 8;
-        break;
-      case 'A':
-        noteInOctave = 10;
-        break;
-      case 'B':
-        noteInOctave = 12;
-        break;
-    }
+    /**
+     * Frequency of note 'A4' (it's common standard)
+     */
+    const defaultFrequency = 440;
 
     /**
-     * Finds the frequency of note using the formula
+     * Size of one semitone is once by the twelfth root of two
+     * Then 'B4' frequency is 440 * 2^(2/12)
      */
     if (note[2] === '#') {
-      return 440 * Math.pow(2, ((noteInOctave + (octave * 12) + 1) - 70) / 12);
+      return defaultFrequency * Math.pow(2, ((noteInOctave + (octave * 12) + 1) - 70) / 12);
     } else {
-      return 440 * Math.pow(2, ((noteInOctave + (octave * 12)) - 70) / 12);
+      return defaultFrequency * Math.pow(2, ((noteInOctave + (octave * 12)) - 70) / 12);
     }
   }
 }

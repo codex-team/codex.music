@@ -1,10 +1,10 @@
 /**
- * Custom error-class ValidationError
+ * Custom errors-class ValidationError
  */
 export class ValidationError extends Error {
   /**
-   * Create error ValidationError
-   * @param {String} message - error message
+   * Create errors ValidationError
+   * @param {String} message - errors message
    */
   constructor(message: string) {
     super(message);
