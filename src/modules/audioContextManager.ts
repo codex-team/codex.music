@@ -25,6 +25,14 @@ class AudioContextManager {
    }
    return this.audioContext;
  }
+
+ /**
+  * Method reports if audio context is defined
+  * @return {Boolean}
+  */
+ public isAudioContextDefined(): boolean {
+   return !!this.audioContext;
+ }
 }
 
 export default new AudioContextManager();
