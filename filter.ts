@@ -29,8 +29,20 @@ class Delay extends Filter {
     source.start(0);
     super()
   }
-
+}
+class highPass extends Filter{
+  /**
+   * high-pass filter (cuts off anything below the selected frequency)
+   */
+  constructor(highPassNode: any) {
+    this.highPassNode = context.createBiquadFilter();
+    highPassNode.type = 2;
+    highPassNode.frequency.value = 1000;
+    highPassNode.frequency.Q = 1;
+    super()
+  }
 }
 
 const gainFilter: Gain = new Gain();
 const delayFilter: Delay = new Delay();
+const highPassFilter: highPass = new highPass();
