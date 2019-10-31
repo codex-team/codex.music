@@ -1,4 +1,4 @@
 /**
- * class represents musical instrument
+ * Class representing musical instrument
  */
 export abstract class Instrument {}

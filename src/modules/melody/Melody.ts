@@ -1,9 +1,9 @@
 /**
- * melody class
+ * Melody class
  */
 export class Melody implements Iterable<string> {
   /**
-   * getter for melody
+   * Getter for melody
    * @return string
    */
   get melody(): string {
@@ -11,7 +11,7 @@ export class Melody implements Iterable<string> {
   }
 
   /**
-   * setter for melody
+   * Setter for melody
    * @param value - string with notes, ' ' as separator
    */
   set melody(value: string) {
@@ -26,7 +26,7 @@ export class Melody implements Iterable<string> {
   }
 
   /**
-   * iterator for notes
+   * Iterator for notes
    */
   [Symbol.iterator](): Iterator<string, any, undefined> {
     let pointer = 0;
@@ -49,6 +49,9 @@ export class Melody implements Iterable<string> {
     };
   }
 
+  /**
+   * Contains raw string representation for notes
+   */
   private _melody: string[];
 
   private parse = (rawMelody:string) => rawMelody.split(' ')

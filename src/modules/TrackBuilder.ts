@@ -1,7 +1,3 @@
-/**
- * class providing track's configuration and playback
- */
-
 import { Melody } from './melody/Melody';
 import { Effect } from './effects/Effect';
 import { Instrument } from './instruments/Instrument';
@@ -9,15 +5,9 @@ import { InstrumentTypes } from './instruments';
 import { EffectTypes } from './effects';
 
 /**
- * class provides track configuration
+ * Class TrackBuilder - provides track configuration
  */
 export class TrackBuilder {
-  private _isPlaying: boolean;
-  private _melody: Melody;
-  private _interval: number;
-  private effects: Effect[] = [];
-  private volume: number;
-  private instrument: Instrument;
   /**
    * creating track with default configuration
    * @this {TrackBuilder}
@@ -31,7 +21,7 @@ export class TrackBuilder {
    * @param instrumentType
    * @return configured musical instrument
    */
-  setInstrument(instrumentType:string) {
+  setInstrument(instrumentType: string): (string) => Instrument {
     try {
       return (this.instrument = new InstrumentTypes[instrumentType]());
     } catch (e) {
@@ -40,6 +30,7 @@ export class TrackBuilder {
   }
 
   /**
+   * Getter method for instrument field
    * @return track's musical instrument
    */
   getInstrument() {
@@ -47,47 +38,48 @@ export class TrackBuilder {
   }
 
   /**
-   * sets the melody of track
+   * Sets the melody of track
    * @param melody
    * @return melody notes
    */
   setMelody(melody: string) {
-    this._melody = new Melody(melody);
-    return this._melody;
+    this.melody = new Melody(melody);
+    return this.melody;
   }
 
   /**
-   * get the melody of track
-   * @return melody notes object
+   * Getter method for the melody of track
+   * @return {melody} object
    */
   getMelody() {
-    return this._melody;
+    return this.melody;
   }
 
   /**
-   * sets interval when the track should repeat after end of playback
+   * Sets interval when the track should repeat after end of playback
    * @param interval
    * @return current interval
    */
   setPlaybackInterval(interval: number) {
-    this._interval = interval;
-    return this._interval;
+    this.interval = interval;
+    return this.interval;
   }
 
   /**
+   * Getter method for interval field
    * @return current interval when the track should repeat after end of playback
    */
   getPlaybackInterval() {
-    return this._interval;
+    return this.interval;
   }
 
   /**
-   * adds effect into effects array
+   * Adds effect into effects array
    * @param effectType
    * @param index
    * @return added effect
    */
-  addEffect(effectType: string, index?:number) {
+  addEffect(effectType: string, index?: number): (string, number?) => Effect {
     const position = (this.effects.length > index && index) || this.effects.length;
 
     try {
@@ -101,6 +93,7 @@ export class TrackBuilder {
   }
 
   /**
+   * Getter method for {Effect} array field
    * @return effects configured for track
    */
   getEffects() {
@@ -108,7 +101,7 @@ export class TrackBuilder {
   }
 
   /**
-   * removes effect from current position or the end of array
+   * Removes effect from current position or the end of array
    * @param index
    * @return removed effect
    */
@@ -121,12 +114,13 @@ export class TrackBuilder {
   }
 
   /**
-   * set gain for effect on current position or for all effects in the array
+   * Setter method for gain from effect on chosen position
+   * or for all effects in the array
    * @param index
    * @param gain
    * @return gain
    */
-  setEffectGain(gain, index?:number) {
+  setEffectGain(gain, index?: number) {
     if (index) {
       this.effects[index].gain = gain;
       return gain;
@@ -138,25 +132,26 @@ export class TrackBuilder {
   }
 
   /**
-   * get gain from current effect
+   * Getter method for gain from chosen effect
    * @param index
    * @return gain
    */
-  getEffectGain(index:number) {
+  getEffectGain(index: number) {
     return this.effects[index].gain;
   }
 
   /**
-   * sets volume for track
+   * Setter method for volume.
    * @param volume
    * @return volume of track
    */
-  setVolume(volume:number) {
+  setVolume(volume: number) {
     this.volume = volume;
     return this.volume;
   }
 
   /**
+   * Getter method for volume
    * @return volume value
    */
   getVolume() {
@@ -164,7 +159,7 @@ export class TrackBuilder {
   }
 
   /**
-   * starts playing the current track
+   * Starts playing the current track
    * @return {void}
    */
   play() {
@@ -172,7 +167,7 @@ export class TrackBuilder {
   }
 
   /**
-   * stops playing the current track
+   * Stops playing the current track
    * @return {void}
    */
   stop() {
@@ -180,7 +175,7 @@ export class TrackBuilder {
   }
 
   /**
-   * is track playing
+   * Is track playing
    * @return {boolean} is the current track playing now
    */
   get isPlaying() {
@@ -188,7 +183,7 @@ export class TrackBuilder {
   }
 
   /**
-   * set default values for all track properties
+   * Sets default values for all track properties
    * @this {TrackBuilder}
    * @return {void}
    */
@@ -199,4 +194,30 @@ export class TrackBuilder {
     this.setEffectGain(50);
     this.setVolume(50);
   }
+
+  /**
+   * Boolean field, true if the track is playing now
+   */
+  private _isPlaying: boolean;
+  /**
+   * Melody field, responsible for parsing raw text to melody notes list
+   */
+  private melody: Melody;
+  /**
+   * Number field, represents time interval,
+   * during which melody, after end, should not start replay
+   */
+  private interval: number;
+  /**
+   * Effects array field, responsible for sound effects storage
+   */
+  private effects: Effect[] = [];
+  /**
+   * Number field, represents the volume set for track
+   */
+  private volume: number;
+  /**
+   * Instrument field, represents the musical instrument set for track
+   */
+  private instrument: Instrument;
 }

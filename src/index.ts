@@ -1,48 +1,35 @@
 import { TracksManager } from './modules/TracksManager';
-import { InstrumentTypes } from './modules/instruments';
-import { EffectTypes } from './modules/effects';
-import { Melody } from './modules/melody/Melody';
 
 /**
  * Chillout audio class
  */
 class ChilloutAudio {
   /**
-   * getter for tracksManager
+   * Getter for tracksManager
    * @return tracksManager
    */
-  get tracksManager(): TracksManager {
+  private get tracksManager(): TracksManager {
     return this._tracksManager;
   }
 
+  /**
+   * Field responsible for tracks management
+   */
   private _tracksManager: TracksManager;
 
   /**
-   * initialises application
+   * Initialises application
    */
-  init() {
+  constructor() {
     this._tracksManager = new TracksManager();
     console.log('initialised!');
   }
 
   /**
-   * frees application
+   * Removes tracks' manager from memory
    */
   destroy() {
     delete this._tracksManager;
-    console.log('app is done!');
   }
 }
-export { ChilloutAudio, TracksManager, EffectTypes, InstrumentTypes, Melody };
-
-const a = new ChilloutAudio();
-
-/*
- * Test
- * /
- * a.init();
- * console.log(a);
- * a.tracksManager.playAll();
- * a.tracksManager.stopAll();
- * a.destroy();
- */
+export { ChilloutAudio };

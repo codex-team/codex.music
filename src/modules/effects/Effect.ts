@@ -1,18 +1,18 @@
 /**
- * effect abstract class, contains methods for implementation
+ *  Abstract class, representing sound effect, containing methods for implementation
  */
 export abstract class Effect {
   /**
-   * type of effect
+   * Type of effect
    */
   private type: string;
   /**
-   * gain value for effect
+   * Gain value for effect
    */
   private _gain: number = 50;
 
   /**
-   * gain setter
+   * Setter for gain
    * @param gain
    */
   set gain(gain) {
@@ -20,7 +20,7 @@ export abstract class Effect {
   }
 
   /**
-   * gain getter
+   * Getter for gain
    * @return gain
    */
   get gain() {

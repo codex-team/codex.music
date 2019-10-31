@@ -1,12 +1,12 @@
-/**
- * class providing tracks management
- */
 import { TrackBuilder } from './TrackBuilder';
 
 /**
- * Class providing tracks management
+ * Class providing track builder instances' management
  */
 export class TracksManager {
+  /**
+   * Contains track builder's instances
+   */
   private readonly _tracks: TrackBuilder[] = [];
 
   /**
@@ -19,15 +19,15 @@ export class TracksManager {
   }
 
   /**
-   * Get tracks array
-   * @return {TrackBuilder[]} tracks array
+   * Getter for tracks array
+   * @return track builder instances' array
    */
   get tracks() {
     return this._tracks;
   }
 
   /**
-   * adds new trackBuilder into tracks' array
+   * Adds new trackBuilder into tracks' array
    * @param index - position where to insert new TrackBuilder instance
    * @return new TrackBuilder instance, inserted into tracks array
    */
@@ -39,11 +39,11 @@ export class TracksManager {
   }
 
   /**
-   * removes trackbuilder from tracks array
+   * Removes trackbuilder from tracks array
    * @param index - position of track to remove
    * @return Trackbuider instance removed from tracks array
    */
-  removeTrack(index?:number) {
+  removeTrack(index?: number) {
     const position = (this.tracks.length > index && index) || this.tracks.length - 1;
     const removedTrack = this.tracks[position];
 
@@ -52,7 +52,7 @@ export class TracksManager {
   }
 
   /**
-   * starts all configured tracks from collection
+   * Starts playback for all configured tracks from collection
    * @return {void}
    */
   playAll() {
@@ -62,7 +62,7 @@ export class TracksManager {
   }
 
   /**
-   * stops all configured tracks from collection
+   * Stops all configured tracks from collection
    * @return {void}
    */
   stopAll() {
@@ -72,7 +72,7 @@ export class TracksManager {
   }
 
   /**
-   * @return {boolean} is any track playing now
+   * @return {boolean} is any track being played now
    */
   get isPlaying() {
     return this.tracks.some(tb => tb.isPlaying);
