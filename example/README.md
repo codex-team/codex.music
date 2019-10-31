@@ -1,4 +1,4 @@
-# CodeX.Music Demo
+# codex.music-demo
 
 ## Project setup
 ```
