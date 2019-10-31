@@ -1,4 +1,4 @@
-import { Melody } from './melody/Melody';
+import { Melody } from './Melody';
 import { Effect } from './effects/Effect';
 import { Instrument } from './instruments/Instrument';
 import { InstrumentTypes } from './instruments';

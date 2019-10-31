@@ -73,7 +73,7 @@ export class Melody {
   private parseNoteList(notes: string): MelodyNote[] {
     const noteList: MelodyNote[] = [];
 
-    notes.split(' ').map((note: string) => {
+    notes.toUpperCase().split(' ').map((note: string) => {
       let noteObject: MelodyNote;
 
       if (!noteValidation(note)) {

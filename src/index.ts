@@ -5,24 +5,18 @@ import { TracksManager } from './modules/TracksManager';
  */
 class ChilloutAudio {
   /**
-   * Getter for tracksManager
-   * @return tracksManager
-   */
-  private get tracksManager(): TracksManager {
-    return this._tracksManager;
-  }
-
-  /**
-   * Field responsible for tracks management
-   */
-  private _tracksManager: TracksManager;
-
-  /**
    * Initialises application
    */
   constructor() {
     this._tracksManager = new TracksManager();
-    console.log('initialised!');
+  }
+
+  /**
+   * Getter for tracksManager
+   * @return tracksManager
+   */
+  get tracksManager(): TracksManager {
+    return this._tracksManager;
   }
 
   /**
@@ -31,5 +25,10 @@ class ChilloutAudio {
   destroy() {
     delete this._tracksManager;
   }
+
+  /**
+   * Field responsible for tracks management
+   */
+  private _tracksManager: TracksManager;
 }
 export { ChilloutAudio };
