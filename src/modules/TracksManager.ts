@@ -5,11 +5,6 @@ import { TrackBuilder } from './TrackBuilder';
  */
 export class TracksManager {
   /**
-   * Contains track builder's instances
-   */
-  private readonly _tracks: TrackBuilder[] = [];
-
-  /**
    * @param initialTracksNumber {number} default number of tracks being added in tracks field
    */
   constructor(initialTracksNumber = 3) {
@@ -77,4 +72,9 @@ export class TracksManager {
   get isPlaying() {
     return this.tracks.some(tb => tb.isPlaying);
   }
+
+  /**
+   * Contains track builder's instances
+   */
+  private readonly _tracks: TrackBuilder[] = [];
 }

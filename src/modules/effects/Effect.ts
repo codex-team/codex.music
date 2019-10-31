@@ -3,15 +3,6 @@
  */
 export abstract class Effect {
   /**
-   * Type of effect
-   */
-  private type: string;
-  /**
-   * Gain value for effect
-   */
-  private _gain: number = 50;
-
-  /**
    * Setter for gain
    * @param gain
    */
@@ -26,4 +17,13 @@ export abstract class Effect {
   get gain() {
     return this._gain;
   }
+
+  /**
+   * Type of effect
+   */
+  private type: string;
+  /**
+   * Gain value for effect
+   */
+  private _gain: number = 50;
 }
