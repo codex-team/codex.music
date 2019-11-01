@@ -2,7 +2,9 @@
  * Class representing an instrument.
  */
 export default abstract class Instrument {
-
+    /**
+     * @property {string} name - Name of the instrument.
+     */
     public name: string;
 
     /**
@@ -12,5 +14,4 @@ export default abstract class Instrument {
     constructor(name: string) {
       this.name = name;
     }
-
 }
