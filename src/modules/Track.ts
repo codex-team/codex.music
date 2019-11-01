@@ -1,5 +1,5 @@
 /**
  * Class Track - provides track configuration
  */
-export class Track {
+export default class Track {
 }

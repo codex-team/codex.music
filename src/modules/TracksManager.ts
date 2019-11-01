@@ -1,5 +1,5 @@
 /**
  * Class providing track builder instances' management
  */
-export class TracksManager {
+export default class TracksManager {
 }
