@@ -12,8 +12,8 @@ class ChilloutAudio {
   }
 
   /**
-   * Getter for tracksManager
-   * @return tracksManager
+   * Getter for Tracks Manager object
+   * @return TracksManager instance
    */
   get tracksManager(): TracksManager {
     return this._tracksManager;
@@ -21,13 +21,14 @@ class ChilloutAudio {
 
   /**
    * Removes tracks' manager from memory
+   * @return {Void}
    */
   destroy() {
     delete this._tracksManager;
   }
 
   /**
-   * Field responsible for tracks management
+   * TracksManager Field providing tracks' playback management and configuration
    */
   private _tracksManager: TracksManager;
 }
