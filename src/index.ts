@@ -3,7 +3,7 @@ import TracksManager from './modules/TracksManager';
 /**
  * Chillout audio class
  */
-class ChilloutAudio {
+export default class ChilloutAudio {
   /**
    * Initialises application
    */
@@ -23,4 +23,3 @@ class ChilloutAudio {
    */
   private tracksManager: TracksManager;
 }
-export { ChilloutAudio };
