@@ -1,10 +1,10 @@
 import Filter from './filter'
 
+/**
+ * Create a  gain filter.
+ * Class create a new filter(gain).The module allows you to change the sound signal level.
+ */
 class Gain extends Filter {
-  /**
-   * Create a  gain filter.
-   * Class create a new filter(gain).The module allows you to change the sound signal level.
-   */
   constructor(gainNode: any, source: any, destination: any) {
     /**
      * @param gainNode - new gain object
