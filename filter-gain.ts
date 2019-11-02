@@ -1,3 +1,5 @@
+import Filter from './filter'
+
 class Gain extends Filter {
   /**
    * Create a  gain filter.
@@ -13,6 +15,5 @@ class Gain extends Filter {
     this.source.connect(gainNode); // connect source of melody to object(gainNode)
     gainNode.connect(destination);
     source.start(0);
-
   }
 }
