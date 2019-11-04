@@ -6,10 +6,15 @@ import Filter from './filter'
  */
 class GainFilter extends Filter {
   /**
-   * @param gainNode - new gain object
-   * @param source - source of melody
-   * @param destination - default system audio output
+   * new gain object
    */
+  public gainNode: any;
+
+  /**
+   * source of melody
+   */
+  public source: any;
+  
   constructor(gainNode: any, source: any, destination: any) {
     /**
      * @param connect - takes one parameter, which indicates what you need to connect to.
