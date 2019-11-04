@@ -1,0 +1,9 @@
+.player-table {
+  background: #E7F8FF;
+  font-family: Arial;
+
+  thead {
+    color: #667C7C;
+    font-size: 16px;
+  }
+}
