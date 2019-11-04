@@ -14,6 +14,12 @@ class GainFilter extends Filter {
    * Sound knot
    */
   public source: any;
+
+  /**
+   *  Loudness sound
+   */
+  public value: number;
+  
   /**
    * @param gainNode - new gain object
    * @param source - melody knot
