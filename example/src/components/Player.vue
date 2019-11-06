@@ -2,7 +2,8 @@
   <tr class="player">
     <td>
       <button class="player__button">
-        Play
+        <div class="player__button-icon"></div>
+        <span>Play</span>
       </button>
     </td>
     <td>
@@ -16,12 +17,12 @@
       </select>
     </td>
     <td>
-      <input
+      <input class="player__input"
         type="text"
       >
     </td>
     <td>
-      <input
+      <input class="player__input"
         type="text"
       >
     </td>
