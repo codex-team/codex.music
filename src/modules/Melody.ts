@@ -4,7 +4,7 @@ import { ValidationError } from '../errors/validationError';
 /**
  * Interface of note in melody noteList
  */
-interface MelodyNote {
+export interface MelodyNote {
   /**
    * Note name (e.g. 'A4', 'C3#')
    */
@@ -48,12 +48,14 @@ export class Melody {
    * Default note length in milliseconds
    */
   private defaultLength = 300;
+  private notes: string
 
   /**
    * Constructor for class Melody
    * @param {String} notes - string with melody notes
    */
   constructor(notes: string) {
+    this.notes = notes;
     this.noteList = this.parseNoteList(notes);
   }
 
@@ -63,6 +65,7 @@ export class Melody {
    */
   public setDefaultLength(defaultLength: number): void {
     this.defaultLength = defaultLength;
+    this.noteList = this.parseNoteList(this.notes);
   }
 
   /**
