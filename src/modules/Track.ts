@@ -48,7 +48,9 @@ export default class Track {
    * Method to play melody
    */
   public play(): void {
-    if (!this.isConfigured) this.configure();
+    if (!this.isConfigured) {
+      this.configure();
+    }
     this.timeOffset = audioContextManager.getAudioContext().currentTime;
     this.melody.noteList.forEach(
       (note: MelodyNote) => {
