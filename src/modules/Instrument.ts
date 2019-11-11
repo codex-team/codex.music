@@ -1,16 +1,21 @@
 import audioContextManager from './audioContextManager';
 import { MelodyNote } from './Melody';
+
+/**
+ * Interface represents wave options
+ */
 export interface WaveOptions {
   sineTerms?: Float32Array,
   cosineTerms?: Float32Array,
   disableNormalization?: boolean
 }
+
 /**
- * Class representing an instrument.
+ * Class representing an instrument
  */
 export default abstract class Instrument {
   /**
-   * Name of the instrument.
+   * Name of the instrument
    */
   public name: string;
 
