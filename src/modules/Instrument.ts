@@ -1,4 +1,4 @@
-import audioContextManager from './audioContextManager';
+import audioContextManager from './AudioContextManager';
 import { MelodyNote } from './Melody';
 
 /**
@@ -54,10 +54,8 @@ export default abstract class Instrument {
    */
   protected constructor(name: string) {
     this.name = name;
-    this.instrumentSourceNode = audioContextManager
-      .getAudioContext().createOscillator();
-    this.volumeNode = audioContextManager
-      .getAudioContext().createGain();
+    this.instrumentSourceNode = audioContextManager.createOscillator();
+    this.volumeNode = audioContextManager.createGain();
     this.instrumentSourceNode.connect(this.volumeNode);
   }
 

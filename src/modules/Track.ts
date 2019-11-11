@@ -1,6 +1,6 @@
 import { Melody, MelodyNote } from './Melody';
 import Instrument from './Instrument';
-import audioContextManager from './audioContextManager';
+import audioContextManager from './AudioContextManager';
 
 /**
  * Class represents Track implementation and Track configuration
