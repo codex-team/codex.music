@@ -1,15 +1,15 @@
-import Instrument, { WaveOptions } from './instrument';
+import Instrument, { WaveOptions } from './Instrument';
+import { Instruments } from '../types/instruments';
 
 /**
  * Class representing an instrument periodic wave
  */
 class SineWaveInstrument extends Instrument {
   /**
-   * Create a periodic wave.
-   * @param {string} name - Name of the instrument.
+   * Create a periodic wave
    */
   constructor() {
-    super('Sine wawe instument');
+    super(Instruments.SINE_WAVE_INSTRUMENT);
     const waveOptions: WaveOptions = {
       sineTerms: new Float32Array([0, 0]),
       cosineTerms: new Float32Array([0, 1])

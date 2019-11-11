@@ -48,7 +48,11 @@ export class Melody {
    * Default note length in milliseconds
    */
   private defaultLength = 300;
-  private notes: string
+
+  /**
+   * Field with all notes in string
+   */
+  private readonly notes: string;
 
   /**
    * Constructor for class Melody
