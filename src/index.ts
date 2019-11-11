@@ -25,16 +25,23 @@ export default class ChilloutAudio {
    * TracksManager Field providing tracks' playback management and configuration
    */
   private tracksManager: TracksManager;
+
+  private track: Track;
+
+  /**
+   * Method for start playing melody
+   */
+  public play(): void {
+    const melody = new Melody('A4 A5 D3 e4 d4 f8 a6 b3 c2 A5 A4');
+
+    this.track = new Track(new SineWaveInstrument(), melody);
+    this.track.play();
+  }
+
+  /**
+   * Method for stop playing melody
+   */
+  public stop(): void {
+    this.track.stop();
+  }
 }
-let t: Track;
-
-document.getElementById('play').onclick = () => {
-  const melody = new Melody('A4 A5 D3 e4 d4 f8 a6 b3 c2 A5 A4');
-
-  // melody.setDefaultLength(2000);
-  t = t || new Track(new SineWaveInstrument(), melody);
-  t.play();
-};
-document.getElementById('stop').onclick = () => {
-  t.stop();
-};
