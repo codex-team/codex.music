@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    Demo application for Codex.Music
     <Home></Home>
   </div>
 </template>
@@ -21,5 +20,13 @@ import Home from './views/Home.vue';
 export default class App extends Vue {}
 </script>
 
+<style src="./styles/base.css"></style>
+
 <style>
+  #app {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+  }
 </style>

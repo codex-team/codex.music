@@ -31,5 +31,20 @@ import Player from '../components/Player.vue';
 export default class Home extends Vue {}
 </script>
 
-<style src="../styles/player.css">
+<style>
+  .player-table {
+    margin: 0 auto;
+    width: 1105px;
+    border-collapse: collapse;
+    thead {
+      color: var(--color-text-second);
+      font-size: 16px;
+      text-align: left;
+      th {
+        vertical-align: middle;
+        height: 40px;
+        border-bottom: 1px solid var(--color-border-table);
+      }
+    }
+  }
 </style>
