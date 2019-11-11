@@ -68,7 +68,7 @@ export default abstract class Instrument {
    * @param note {MelodyNote} - note object like MelodyNote
    * @param when {Number} - time when instrument will play note
    */
-  public playNote(note: MelodyNote, when: number) {
+  public playNote(note: MelodyNote, when: number): void {
     if (!this.isStarted) this.start();
     this.instrumentSourceNode.frequency.setValueAtTime(note.frequency, when);
   }
@@ -77,7 +77,7 @@ export default abstract class Instrument {
    * Setter method for wave type of instrument's audio node
    * @param newWaveOptions {WaveOptions} - new wave options except base wave options
    */
-  protected setWave(newWaveOptions: WaveOptions) {
+  protected setWave(newWaveOptions: WaveOptions): void {
     this.waveOptions = {
       ...this.waveOptions,
       ...newWaveOptions
