@@ -28,7 +28,7 @@ class AudioContextManager {
     /**
      * Cross-browser audio context creation
      */
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
     this.audioContext = new AudioContext();
   }

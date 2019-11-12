@@ -122,7 +122,7 @@ export class Melody {
    * @return {Number} frequency - frequency of note in hertz
    */
   private static getFrequency(note: string): number {
-    const noteInOctave: number = NoteNames[note[0]];
+    const noteInOctave: number = NoteNames[note[0] as keyof typeof NoteNames];
 
     const octave: number = +note[1] + 1;
 
