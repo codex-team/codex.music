@@ -5,8 +5,19 @@ import { MelodyNote } from './Melody';
  * Interface represents wave options
  */
 export interface WaveOptions {
+  /**
+   * An array of cosine terms (traditionally the A terms)
+   */
   sineTerms?: Float32Array,
+
+  /**
+   * An array of sine terms (traditionally the B terms)
+   */
   cosineTerms?: Float32Array,
+
+  /**
+   * Specifies whether normalization should be disabled
+   */
   disableNormalization?: boolean
 }
 
