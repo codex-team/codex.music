@@ -7,7 +7,7 @@ class AudioContextManager {
   /**
    * Field with page's AudioContext
    */
-  private audioContext: AudioContext;
+  private audioContext!: AudioContext;
 
   /**
    * Getter for audioContext field
@@ -61,6 +61,20 @@ class AudioContextManager {
       this.createAudioContext();
     }
     return this.audioContext.createOscillator();
+  }
+
+  /**
+   * Create periodic wave by audio context
+   * @param real {Float32Array} - an array of cosine terms (traditionally the A terms)
+   * @param imag {Float32Array} - an array of sine terms (traditionally the B terms)
+   * @param constraints {PeriodicWaveConstraints} - an dictionary object that specifies whether normalization should be disabled
+   * @return {PeriodicWave}
+   */
+  public createPeriodicWave(real: Float32Array, imag: Float32Array, constraints?: PeriodicWaveConstraints): PeriodicWave {
+    if (!this.isAudioContextDefined()) {
+      this.createAudioContext();
+    }
+    return this.audioContext.createPeriodicWave(real, imag, constraints);
   }
 }
 

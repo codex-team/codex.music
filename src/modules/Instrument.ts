@@ -85,9 +85,9 @@ export default abstract class Instrument {
       ...this.waveOptions,
       ...newWaveOptions
     };
-    const periodicWave = audioContextManager.getAudioContext().createPeriodicWave(
-      this.waveOptions.cosineTerms,
-      this.waveOptions.sineTerms,
+    const periodicWave = audioContextManager.createPeriodicWave(
+      this.waveOptions.cosineTerms as Float32Array,
+      this.waveOptions.sineTerms as Float32Array,
       {
         disableNormalization: this.waveOptions.disableNormalization
       }

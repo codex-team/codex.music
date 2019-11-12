@@ -22,16 +22,11 @@ export default class Track {
   private isConfigured = false;
 
   /**
-   * Time to recognise when the note should be played
-   */
-  private timeOffset: number;
-
-  /**
    * Constructor for track
    * @param instrument {Instrument} - chosen musical instrument
    * @param melody {Melody} - melody to play
    */
-  public constructor(instrument?: Instrument, melody?: Melody) {
+  public constructor(instrument: Instrument, melody: Melody) {
     this.instrument = instrument;
     this.melody = melody;
   }
@@ -51,14 +46,14 @@ export default class Track {
     if (!this.isConfigured) {
       this.configure();
     }
-    this.timeOffset = audioContextManager.getAudioContext().currentTime;
+    let timeOffset = audioContextManager.getAudioContext().currentTime;
     this.melody.noteList.forEach(
       (note: MelodyNote) => {
-        this.instrument.playNote(note, this.timeOffset);
-        this.timeOffset += note.length / 1000;
+        this.instrument.playNote(note, timeOffset);
+        timeOffset += note.length / 1000;
       }
     );
-    this.instrument.stop(this.timeOffset);
+    this.instrument.stop(timeOffset);
   }
 
   /**

@@ -9,10 +9,29 @@ import { Instruments } from './types/instruments';
  */
 export default class ChilloutAudio {
   /**
-   * Initialises application
+   * TracksManager Field providing tracks' playback management and configuration
    */
-  public constructor() {
+  private tracksManager!: TracksManager;
+
+  /**
+   * Field represents track
+   */
+  private track!: Track;
+
+  /**
+   * Initialises application
+   * @param notes {String} - notes in melody
+   * @param instrument {Instruments} - name of instrument
+   */
+  public constructor(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.SINE_WAVE_INSTRUMENT) {
     this.tracksManager = new TracksManager();
+    const melody = new Melody(notes);
+
+    switch (instrument) {
+      case Instruments.SINE_WAVE_INSTRUMENT:
+        this.track = new Track(new SineWaveInstrument(), melody);
+        break;
+    }
   }
 
   /**
@@ -23,25 +42,9 @@ export default class ChilloutAudio {
   }
 
   /**
-   * TracksManager Field providing tracks' playback management and configuration
-   */
-  private tracksManager: TracksManager;
-
-  private track: Track;
-
-  /**
    * Method for start playing melody
-   * @param notes {String} - notes in melody
-   * @param instrument {Instruments} - name of instrument
    */
-  public play(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.SINE_WAVE_INSTRUMENT): void {
-    const melody = new Melody(notes);
-
-    switch (instrument) {
-      case Instruments.SINE_WAVE_INSTRUMENT:
-        this.track = new Track(new SineWaveInstrument(), melody);
-        break;
-    }
+  public play(): void {
     this.track.play();
   }
 
