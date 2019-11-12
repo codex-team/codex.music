@@ -11,12 +11,12 @@ export default class ChilloutAudio {
   /**
    * TracksManager Field providing tracks' playback management and configuration
    */
-  private tracksManager!: TracksManager;
+  private tracksManager: TracksManager;
 
   /**
    * Field represents track
    */
-  private track!: Track;
+  private track: Track | undefined;
 
   /**
    * Initialises application
@@ -45,13 +45,17 @@ export default class ChilloutAudio {
    * Method for start playing melody
    */
   public play(): void {
-    this.track.play();
+    if (this.track) {
+      this.track.play();
+    }
   }
 
   /**
    * Method for stop playing melody
    */
   public stop(): void {
-    this.track.stop();
+    if (this.track) {
+      this.track.stop();
+    }
   }
 }
