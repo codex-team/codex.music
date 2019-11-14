@@ -1,6 +1,7 @@
 import { Melody, MelodyNote } from './Melody';
 import Instrument from './Instrument';
 import audioContextManager from './AudioContextManager';
+import { GainFilter } from './filters/filter-gain';
 
 /**
  * Class represents Track implementation and Track configuration
@@ -25,10 +26,12 @@ export default class Track {
    * Constructor for track
    * @param instrument {Instrument} - chosen musical instrument
    * @param melody {Melody} - melody to play
+   * @param gainFilter - the module allows you to change the sound signal level
    */
-  public constructor(instrument: Instrument, melody: Melody) {
+  public constructor(instrument: Instrument, melody: Melody, gainFilter: GainFilter) {
     this.instrument = instrument;
     this.melody = melody;
+    this.gainFilter = GainFilter;
   }
 
   /**
@@ -47,6 +50,7 @@ export default class Track {
       this.configure();
     }
     let timeOffset = audioContextManager.getAudioContext().currentTime;
+
     this.melody.noteList.forEach(
       (note: MelodyNote) => {
         this.instrument.playNote(note, timeOffset);

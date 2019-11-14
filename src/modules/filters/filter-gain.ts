@@ -33,3 +33,5 @@ class GainFilter extends Filter {
     source.start(0);
   }
 }
+
+export { GainFilter };
