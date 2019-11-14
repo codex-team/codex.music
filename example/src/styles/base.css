@@ -1,0 +1,26 @@
+@import "variables.css";
+
+/**
+ * Base site styles
+ */
+html,body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  min-height: 100%;
+  overflow: hidden;
+  color: var(--color-text-main);
+  background: var(--color-bg-main);
+  font-size: 15px;
+  font-family: Roboto, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}

@@ -1,0 +1,16 @@
+:root {
+  /** Fonts */
+  --color-text-main: #102a24;
+  --color-text-second: #667C7C;
+
+  /** Backgrounds */
+  --color-bg-main: #E7F8FF;
+  --color-bg-element: #ecfff6;
+  --color-bg-range-thumb: #23cba3;
+  --color-bg-range-track: rgba(16, 42, 36, 0.6);
+  --color-bg-label: rgba(16, 42, 36, 0.6);
+
+  /** Borders */
+  --color-border-element: #cbe9d7;
+  --color-border-table: #cbe9d7;
+}
