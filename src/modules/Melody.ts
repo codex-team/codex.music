@@ -4,7 +4,7 @@ import { ValidationError } from '../errors/validationError';
 /**
  * Interface of note in melody noteList
  */
-interface MelodyNote {
+export interface MelodyNote {
   /**
    * Note name (e.g. 'A4', 'C3#')
    */
@@ -50,10 +50,16 @@ export class Melody {
   private defaultLength = 300;
 
   /**
+   * Field with all notes in string
+   */
+  private readonly notes: string;
+
+  /**
    * Constructor for class Melody
    * @param {String} notes - string with melody notes
    */
   constructor(notes: string) {
+    this.notes = notes;
     this.noteList = this.parseNoteList(notes);
   }
 
@@ -63,6 +69,7 @@ export class Melody {
    */
   public setDefaultLength(defaultLength: number): void {
     this.defaultLength = defaultLength;
+    this.noteList = this.parseNoteList(this.notes);
   }
 
   /**
@@ -73,7 +80,7 @@ export class Melody {
   private parseNoteList(notes: string): MelodyNote[] {
     const noteList: MelodyNote[] = [];
 
-    notes.split(' ').map((note: string) => {
+    notes.toUpperCase().split(' ').map((note: string) => {
       let noteObject: MelodyNote;
 
       if (!noteValidation(note)) {
@@ -115,7 +122,7 @@ export class Melody {
    * @return {Number} frequency - frequency of note in hertz
    */
   private static getFrequency(note: string): number {
-    const noteInOctave: number = NoteNames[note[0]];
+    const noteInOctave: number = NoteNames[note[0] as keyof typeof NoteNames];
 
     const octave: number = +note[1] + 1;
 
