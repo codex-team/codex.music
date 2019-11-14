@@ -1,7 +1,5 @@
 @import "variables.css";
 
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 /**
  * Base site styles
  */
@@ -23,6 +21,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-*, *:before, *:after {
+*, *::before, *::after {
   box-sizing: inherit;
 }
