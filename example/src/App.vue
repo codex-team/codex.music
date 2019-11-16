@@ -8,13 +8,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ChilloutMusic from '../../src/index';
+import ChilloutAudio from '../../dist/index.js';
 
 @Component({
   components: {},
 })
 export default class App extends Vue {
-  chilloutmusic = new ChilloutMusic();
+  chilloutmusic = new ChilloutAudio();
 
   play() {
     this.chilloutmusic.play();

@@ -4,7 +4,9 @@ module.exports = {
   entry: './src/index.ts',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.min.js'
+    filename: 'index.js',
+    library: 'ChilloutAudio',
+    libraryExport: 'default'
   },
   resolve: {
     extensions: [ '.ts' ]
@@ -19,7 +21,11 @@ module.exports = {
         ],
         use: [
           {
-            loader: 'awesome-typescript-loader'
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: false,
+              happyPackMode: false
+            }
           },
           {
             loader: 'eslint-loader',

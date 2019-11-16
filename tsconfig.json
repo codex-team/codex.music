@@ -1,20 +1,16 @@
 {
-  "compilerOptions": {
-    "typeRoots" : ["./types", "./node_modules/@types"],
+  "compilerOptions" : {
+    "typeRoots" : ["./types"],
     "sourceMap": true,
     "module": "commonjs",
-    "target": "es6",
-    "lib": [
-      "es2015",
-      "es2017",
-      "dom"
-    ],
+    "target": "es2017",
     "removeComments": true,
-    "allowSyntheticDefaultImports": false,
-    "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-    }
+    "declaration": true,
+    "declarationDir": "dist",
+    "importHelpers": true,
+    "moduleResolution": "node", // This resolution strategy attempts to mimic the Node.js module resolution mechanism at runtime
+    "lib": ["dom", "es2017", "es2018"],
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
