@@ -21,7 +21,10 @@ export default class Track {
    * Track status (audio source is already connected with destination)
    */
   private isConfigured = false;
-
+  /**
+   *
+   */
+  private gainFilter: GainFilter;
   /**
    * Constructor for track
    * @param instrument {Instrument} - chosen musical instrument
@@ -58,6 +61,7 @@ export default class Track {
       }
     );
     this.instrument.stop(timeOffset);
+    this.gainFilter.value = 1;
   }
 
   /**

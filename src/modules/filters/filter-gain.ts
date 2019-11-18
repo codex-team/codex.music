@@ -18,7 +18,7 @@ class GainFilter extends Filter {
   /**
    *  Loudness sound
    */
-  private value: number;
+  public value: number;
 
   /**
    * @param gainNode - new gain object
