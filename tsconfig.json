@@ -2,19 +2,16 @@
   "compilerOptions": {
     "typeRoots" : ["./types"],
     "sourceMap": true,
-    "module": "commonjs",
-    "target": "es6",
+    "target": "es2017",
     "lib": [
-      "es2015",
       "es2017",
+      "es2018",
       "dom"
     ],
     "removeComments": true,
-    "allowSyntheticDefaultImports": false,
-    "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-    }
+    "declaration": true,
+    "declarationDir": "dist",
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",

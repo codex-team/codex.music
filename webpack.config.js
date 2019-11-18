@@ -4,7 +4,10 @@ module.exports = {
   entry: './src/index.ts',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.min.js'
+    filename: 'index.js',
+    library: 'CodexMusic',
+    libraryExport: 'default',
+    libraryTarget: 'umd'
   },
   resolve: {
     extensions: [ '.ts' ]
