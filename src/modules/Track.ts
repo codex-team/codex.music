@@ -58,6 +58,7 @@ export default class Track {
       }
     );
     this.instrument.stop(timeOffset);
+    this.gainNode.value = 1;
   }
 
   /**
