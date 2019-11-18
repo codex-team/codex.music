@@ -3,4 +3,14 @@
  * These are amplifiers, delay lines, filters, convolution modules, splitters and mergers)
  */
 export default abstract class Filter {
+  /**
+   * Sound knot
+   */
+  private source: any;
+  /**
+   * @param source - melody knot
+   */
+  constructor(source:any) {
+    source.start(0);
+  }
 }

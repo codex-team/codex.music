@@ -24,7 +24,7 @@ export default class Track {
   /**
    * Class create a new filter(gain).The module allows you to change the sound signal level.
    */
-  private gainFilter: GainFilter;
+  public gainFilter: GainFilter;
   /**
    * Constructor for track
    * @param instrument {Instrument} - chosen musical instrument

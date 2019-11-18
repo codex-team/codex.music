@@ -30,7 +30,6 @@ class GainFilter extends Filter {
     this.gainNode.gain.value = this.value; // value 0..1 (can be changed dynamically)
     this.source.connect(gainNode); // connect source of melody to object(gainNode)
     gainNode.connect(destination); // connect with place of destination
-    source.start(0);
   }
 }
 
