@@ -47,6 +47,7 @@ export default class Track {
       this.configure();
     }
     let timeOffset = audioContextManager.getAudioContext().currentTime;
+
     this.melody.noteList.forEach(
       (note: MelodyNote) => {
         this.instrument.playNote(note, timeOffset);
