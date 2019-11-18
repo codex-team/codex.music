@@ -22,7 +22,7 @@ export default class Track {
    */
   private isConfigured = false;
   /**
-   *
+   * Class create a new filter(gain).The module allows you to change the sound signal level.
    */
   private gainFilter: GainFilter;
   /**
