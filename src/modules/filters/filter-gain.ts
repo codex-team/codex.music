@@ -1,4 +1,4 @@
-import Filter from './filter'
+import Filter from './filter';
 
 /**
  * Create a  gain filter.
