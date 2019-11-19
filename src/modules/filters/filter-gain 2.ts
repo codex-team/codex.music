@@ -6,30 +6,31 @@ import Filter from './filter';
  */
 class GainFilter extends Filter {
   /**
-   * Interface represents a change in volume
+   * New gain object
    */
   private gainNode: any;
 
   /**
-   * Interfaces allow you to add audio spatialization panning effects to your audio
+   * Sound knot
    */
   private source: any;
 
   /**
    *  Loudness sound
    */
-  public value: number;
+  private value: number;
 
   /**
-   * @param gainNode - interface represents a change in volume
-   * @param source - interfaces allow you to add audio spatialization panning effects to your audio
-   * @param destination - once you are done processing your audio, these interfaces define where to output it.
+   * @param gainNode - new gain object
+   * @param source - melody knot
+   * @param destination - place of purpose
    */
   constructor(gainNode: any, source: any, destination: any) {
     super();
     this.gainNode.gain.value = this.value; // value 0..1 (can be changed dynamically)
     this.source.connect(gainNode); // connect source of melody to object(gainNode)
     gainNode.connect(destination); // connect with place of destination
+    source.start(0);
   }
 }
 
