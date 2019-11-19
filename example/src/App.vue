@@ -8,16 +8,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ChilloutMusic from '../../dist';
+import ChilloutAudio from "CodexMusic";
 
 @Component({
   components: {},
 })
 export default class App extends Vue {
-  chilloutmusic = new ChilloutMusic();
+  chilloutmusic = new ChilloutAudio();
 
   play() {
-    console.log(ChilloutMusic);
+    this.chilloutmusic.play();
   }
 
   stop() {
