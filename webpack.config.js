@@ -6,8 +6,8 @@ module.exports = {
     path: path.join(__dirname, '/dist'),
     filename: 'index.js',
     library: 'CodexMusic',
-    libraryExport: 'default',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   },
   resolve: {
     extensions: [ '.ts' ]
@@ -22,7 +22,7 @@ module.exports = {
         ],
         use: [
           {
-            loader: 'awesome-typescript-loader'
+            loader: 'ts-loader'
           },
           {
             loader: 'eslint-loader',
