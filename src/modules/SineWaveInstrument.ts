@@ -4,7 +4,7 @@ import { Instruments } from '../types/instruments';
 /**
  * Class representing an instrument periodic wave
  */
-class SineWaveInstrument extends Instrument {
+export default class SineWaveInstrument extends Instrument {
   /**
    * Create a periodic wave
    */
@@ -18,5 +18,3 @@ class SineWaveInstrument extends Instrument {
     this.setWave(waveOptions);
   }
 }
-
-export default SineWaveInstrument;
