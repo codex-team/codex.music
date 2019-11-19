@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Audio synthesis",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development -w"
