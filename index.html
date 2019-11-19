@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodeX.Music</title>
+  <script src="dist/index.js"></script>
+</head>
+<body>
+Demo application for Codex.Music
+<button id="play">Play</button>
+<button id="stop">Stop</button>
+
+<script>
+  const chilloutaudio = new CodexMusic();
+  document.getElementById('play').onclick = () => {
+    chilloutaudio.play();
+  };
+
+  document.getElementById('stop').onclick = () => {
+    chilloutaudio.stop();
+  };
+</script>
+</body>
+</html>
