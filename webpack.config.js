@@ -4,7 +4,10 @@ module.exports = {
   entry: './src/index.ts',
   output: {
     path: path.join(__dirname, '/dist'),
-    filename: 'bundle.min.js'
+    filename: 'index.js',
+    library: 'CodexMusic',
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   },
   resolve: {
     extensions: [ '.ts' ]
@@ -14,12 +17,11 @@ module.exports = {
       {
         test: /\.ts?$/,
         exclude: [
-          /node_modules/,
-          '/example/'
+          /node_modules/
         ],
         use: [
           {
-            loader: 'awesome-typescript-loader'
+            loader: 'ts-loader'
           },
           {
             loader: 'eslint-loader',

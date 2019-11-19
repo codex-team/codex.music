@@ -2,7 +2,7 @@
   "name": "codex.music",
   "version": "0.0.1",
   "description": "Audio synthesis",
-  "main": "dist/bundle.min.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development -w"
@@ -28,16 +28,14 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
-    "awesome-typescript-loader": "^5.2.1",
     "eslint": "^6.5.1",
     "eslint-config-codex": "github:codex-team/eslint-config",
     "eslint-config-standard": "^14.1.0",
     "eslint-loader": "^3.0.2",
+    "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   },
-  "dependencies": {
-    "@types/webaudioapi": "^0.0.27"
-  }
+  "dependencies": {}
 }
