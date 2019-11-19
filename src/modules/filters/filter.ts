@@ -10,7 +10,7 @@ export default abstract class Filter {
   /**
    * @param source - melody knot
    */
-  protected constructor(source:AudioBufferSourceNode) {
+  protected constructor(source: AudioBufferSourceNode) {
     source.start(0);
   }
 }
