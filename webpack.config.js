@@ -17,8 +17,7 @@ module.exports = {
       {
         test: /\.ts?$/,
         exclude: [
-          /node_modules/,
-          '/example/'
+          /node_modules/
         ],
         use: [
           {
