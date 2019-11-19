@@ -1,7 +1,12 @@
-# codex.music
+# CodeX.Music
 
-### install dependencies
-`yarn install --frozen-lockfile`
+## Install dependencies
+`yarn install`
 
-### for local development use
+## For local development use
 `yarn dev`
+
+## Build library
+`yarn build`
+
+The library will be built in the `dist` folder.
