@@ -25,12 +25,15 @@ class GainFilter extends Filter {
    * @param source - interfaces allow you to add audio spatialization panning effects to your audio
    * @param destination - once you are done processing your audio, these interfaces define where to output it.
    */
-  constructor(gainNode: GainNode, source: AudioBufferSourceNode, destination: AudioNode) {
+  constructor() {
     super();
+  }
+
+  gainFilter(gainNode: GainNode, source: AudioBufferSourceNode, destination: AudioNode) {
     this.gainNode.gain.value = this.value; // value 0..1 (can be changed dynamically)
     this.source.connect(gainNode); // connect source of melody to object(gainNode)
     gainNode.connect(destination); // connect with place of destination
   }
 }
-
+GainFilter.gainFilter();
 export { GainFilter };
