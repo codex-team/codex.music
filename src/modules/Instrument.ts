@@ -40,7 +40,6 @@ export default abstract class Instrument {
    * Volume of instrument
    */
   private readonly volumeNode: GainNode;
-  private readonly lowPassFilter : LowPassFilter;
   /**
    * Represents audio node periodic wave
    */
