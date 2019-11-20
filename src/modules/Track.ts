@@ -1,7 +1,6 @@
 import { Melody, MelodyNote } from './Melody';
 import Instrument from './Instrument';
 import audioContextManager from './AudioContextManager';
-import { GainFilter } from './filters/filter-gain';
 
 /**
  * Class represents Track implementation and Track configuration
@@ -21,17 +20,6 @@ export default class Track {
    * Track status (audio source is already connected with destination)
    */
   private isConfigured = false;
-  /**
-   * Class create a new filter(gain).The module allows you to change the sound signal level.
-   */
-  public gainFilter: GainFilter;
-  /**
-   * Constructor for track
-   * @param instrument {Instrument} - chosen musical instrument
-   * @param melody {Melody} - melody to play
-   * @param gainFilter - the module allows you to change the sound signal level
-   */
-
   /**
    * Method to connect audio source with destination
    */
@@ -56,7 +44,6 @@ export default class Track {
       }
     );
     this.instrument.stop(timeOffset);
-    this.gainFilter.value = 1;
   }
 
   /**
