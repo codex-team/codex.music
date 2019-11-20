@@ -31,11 +31,6 @@ export default class Track {
    * @param melody {Melody} - melody to play
    * @param gainFilter - the module allows you to change the sound signal level
    */
-  public constructor(instrument: Instrument, melody: Melody, gainFilter: GainFilter) {
-    this.instrument = instrument;
-    this.melody = melody;
-    this.gainFilter = GainFilter;
-  }
 
   /**
    * Method to connect audio source with destination

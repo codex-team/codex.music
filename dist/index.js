@@ -188,7 +188,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Ins
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Track; });\n/* harmony import */ var _AudioContextManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AudioContextManager */ \"./src/modules/AudioContextManager.ts\");\n/* harmony import */ var _filters_filter_gain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filters/filter-gain */ \"./src/modules/filters/filter-gain.ts\");\n\n\n/**\n * Class represents Track implementation and Track configuration\n */\nclass Track {\n    /**\n     * Constructor for track\n     * @param instrument {Instrument} - chosen musical instrument\n     * @param melody {Melody} - melody to play\n     * @param gainFilter - the module allows you to change the sound signal level\n     */\n    constructor(instrument, melody, gainFilter) {\n        /**\n         * Track status (audio source is already connected with destination)\n         */\n        this.isConfigured = false;\n        this.instrument = instrument;\n        this.melody = melody;\n        this.gainFilter = _filters_filter_gain__WEBPACK_IMPORTED_MODULE_1__[\"GainFilter\"];\n    }\n    /**\n     * Method to connect audio source with destination\n     */\n    configure() {\n        this.instrument.node.connect(_AudioContextManager__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getAudioContext().destination);\n        this.isConfigured = true;\n    }\n    /**\n     * Method to play melody\n     */\n    play() {\n        if (!this.isConfigured) {\n            this.configure();\n        }\n        let timeOffset = _AudioContextManager__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getAudioContext().currentTime;\n        this.melody.noteList.forEach((note) => {\n            this.instrument.playNote(note, timeOffset);\n            timeOffset += note.length / 1000;\n        });\n        this.instrument.stop(timeOffset);\n        this.gainFilter.value = 1;\n    }\n    /**\n     * Method to stop the track's playback\n     */\n    stop() {\n        this.instrument.stop();\n    }\n}\n\n\n//# sourceURL=webpack://CodexMusic/./src/modules/Track.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Track; });\n/* harmony import */ var _AudioContextManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AudioContextManager */ \"./src/modules/AudioContextManager.ts\");\n\n/**\n * Class represents Track implementation and Track configuration\n */\nclass Track {\n    constructor() {\n        /**\n         * Track status (audio source is already connected with destination)\n         */\n        this.isConfigured = false;\n    }\n    /**\n     * Constructor for track\n     * @param instrument {Instrument} - chosen musical instrument\n     * @param melody {Melody} - melody to play\n     * @param gainFilter - the module allows you to change the sound signal level\n     */\n    /**\n     * Method to connect audio source with destination\n     */\n    configure() {\n        this.instrument.node.connect(_AudioContextManager__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getAudioContext().destination);\n        this.isConfigured = true;\n    }\n    /**\n     * Method to play melody\n     */\n    play() {\n        if (!this.isConfigured) {\n            this.configure();\n        }\n        let timeOffset = _AudioContextManager__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getAudioContext().currentTime;\n        this.melody.noteList.forEach((note) => {\n            this.instrument.playNote(note, timeOffset);\n            timeOffset += note.length / 1000;\n        });\n        this.instrument.stop(timeOffset);\n        this.gainFilter.value = 1;\n    }\n    /**\n     * Method to stop the track's playback\n     */\n    stop() {\n        this.instrument.stop();\n    }\n}\n\n\n//# sourceURL=webpack://CodexMusic/./src/modules/Track.ts?");
 
 /***/ }),
 
@@ -201,30 +201,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return TracksManager; });\n/**\n * Class providing track builder instances' management\n */\nclass TracksManager {\n}\n\n\n//# sourceURL=webpack://CodexMusic/./src/modules/TracksManager.ts?");
-
-/***/ }),
-
-/***/ "./src/modules/filters/filter-gain.ts":
-/*!********************************************!*\
-  !*** ./src/modules/filters/filter-gain.ts ***!
-  \********************************************/
-/*! exports provided: GainFilter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GainFilter\", function() { return GainFilter; });\n/* harmony import */ var _filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./filter */ \"./src/modules/filters/filter.ts\");\n\n/**\n * Create a  gain filter.\n * Class create a new filter(gain).The module allows you to change the sound signal level.\n */\nclass GainFilter extends _filter__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    /**\n     * @param gainNode - interface represents a change in volume\n     * @param source - interfaces allow you to add audio spatialization panning effects to your audio\n     * @param destination - once you are done processing your audio, these interfaces define where to output it.\n     */\n    constructor() {\n        super();\n    }\n    gainFilter(gainNode, source, destination) {\n        this.gainNode.gain.value = this.value; // value 0..1 (can be changed dynamically)\n        this.source.connect(gainNode); // connect source of melody to object(gainNode)\n        gainNode.connect(destination); // connect with place of destination\n    }\n}\nGainFilter.gainFilter();\n\n\n\n//# sourceURL=webpack://CodexMusic/./src/modules/filters/filter-gain.ts?");
-
-/***/ }),
-
-/***/ "./src/modules/filters/filter.ts":
-/*!***************************************!*\
-  !*** ./src/modules/filters/filter.ts ***!
-  \***************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Filter; });\n/**\n * Create class Filter.(Using filters, we create high-level, configurable, and ready-to-use modules.\n * These are amplifiers, delay lines, filters, convolution modules, splitters and mergers)\n */\nclass Filter {\n    /**\n     * @param source - melody knot\n     */\n    constructor(source) {\n        source.start(0);\n    }\n}\n\n\n//# sourceURL=webpack://CodexMusic/./src/modules/filters/filter.ts?");
 
 /***/ }),
 
