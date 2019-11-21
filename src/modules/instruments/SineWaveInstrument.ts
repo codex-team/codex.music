@@ -1,5 +1,5 @@
-import Instrument, { WaveOptions } from './Instrument';
-import { Instruments } from '../types/instruments';
+import Instrument, { WaveOptions } from '../Instrument';
+import { Instruments } from '../../types/instruments';
 
 /**
  * Class representing an instrument periodic wave

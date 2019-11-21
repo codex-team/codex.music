@@ -1,7 +1,7 @@
 import TracksManager from './modules/TracksManager';
 import Track from './modules/Track';
-import SineWaveInstrument from './modules/SineWaveInstrument';
-import HornInstrument from './modules/Horn';
+import SineWaveInstrument from './modules/instruments/SineWaveInstrument';
+import HornInstrument from './modules/instruments/Horn';
 import { Melody } from './modules/Melody';
 import { Instruments } from './types/instruments';
 
