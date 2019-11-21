@@ -8,16 +8,16 @@ class LowPassFilter extends Filter {
   /**
    * Create a new filter
    */
-  private filter: any;
+  readonly filterLowPass: any;
 
   /**
    *
-   * @param filter - create a ew filter
+   * @param filterLowPass - create a ew filter
    */
-  constructor(filter: BiquadFilterNode) {
+  constructor(filterLowPass: BiquadFilterNode) {
     super();
-    this.filter.type = 'lowpass';
-    filter.frequency.value = 100;
+    this.filterLowPass.type = 'lowpass';
+    filterLowPass.frequency.value = 100;
   }
 }
 export { LowPassFilter };
