@@ -81,7 +81,7 @@ class AudioContextManager {
    * Get current time of audio context
    * @return {Number}
    */
-  public getCurrentTime(): number {
+  public get currentTime(): number {
     return this.getAudioContext().currentTime;
   }
 }
