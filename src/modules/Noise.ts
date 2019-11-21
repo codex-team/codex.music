@@ -47,9 +47,7 @@ export default class Noise {
    * @param destination {AudioDestinationNode} - audio context destination
    */
   public connect(destination: AudioDestinationNode): void {
-    if (this.isConfigured) {
-      this.bufferNode.connect(this.bandpass).connect(destination);
-    }
+    this.bufferNode.connect(this.bandpass).connect(destination);
   }
 
   /**
@@ -57,9 +55,7 @@ export default class Noise {
    * @param frequency {Number} - new frequency in hertz
    */
   public setNoiseFrequency(frequency: number): void {
-    if (this.isConfigured) {
-      this.bandpass.frequency.value = frequency;
-    }
+    this.bandpass.frequency.value = frequency;
   }
 
   /**
@@ -67,9 +63,7 @@ export default class Noise {
    * @param when {Number} - time for starting node (default - audioContext.currentTime)
    */
   public play(when: number = audioContextManager.currentTime): void {
-    if (this.isConfigured) {
-      this.bufferNode.start(when);
-    }
+    this.bufferNode.start(when);
   }
 
   /**
@@ -77,9 +71,7 @@ export default class Noise {
    * @param when {Number} - time for stopping node (default - audioContext.currentTime)
    */
   public stop(when: number = audioContextManager.currentTime): void {
-    if (this.isConfigured) {
-      this.bufferNode.stop(when);
-    }
+    this.bufferNode.stop(when);
   }
 
   /**
