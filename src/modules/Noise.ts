@@ -43,24 +43,6 @@ export default class Noise {
   }
 
   /**
-   * Configure noise node
-   */
-  private configure(): void {
-    this.bufferNode = audioContextManager.getAudioContext().createBufferSource();
-    this.buffer = audioContextManager.getAudioContext().createBuffer(1, 4096, audioContextManager.getAudioContext().sampleRate);
-    this.buffersChannelData = this.buffer.getChannelData(0);
-
-    for (let i = 0; i < 4096; i++) {
-      this.buffersChannelData[i] = Math.random() * 2 - 1;
-    }
-    this.bufferNode.buffer = this.buffer;
-    this.bufferNode.loop = true;
-    this.bandpass = audioContextManager.getAudioContext().createBiquadFilter();
-    this.bandpass.type = 'bandpass';
-    this.isConfigured = true;
-  }
-
-  /**
    * Connect noise node to audio context destination
    * @param destination {AudioDestinationNode} - audio context destination
    */
@@ -98,5 +80,23 @@ export default class Noise {
     if (this.isConfigured) {
       this.bufferNode.stop(when);
     }
+  }
+
+  /**
+   * Configure noise node
+   */
+  private configure(): void {
+    this.bufferNode = audioContextManager.getAudioContext().createBufferSource();
+    this.buffer = audioContextManager.getAudioContext().createBuffer(1, 4096, audioContextManager.getAudioContext().sampleRate);
+    this.buffersChannelData = this.buffer.getChannelData(0);
+
+    for (let i = 0; i < 4096; i++) {
+      this.buffersChannelData[i] = Math.random() * 2 - 1;
+    }
+    this.bufferNode.buffer = this.buffer;
+    this.bufferNode.loop = true;
+    this.bandpass = audioContextManager.getAudioContext().createBiquadFilter();
+    this.bandpass.type = 'bandpass';
+    this.isConfigured = true;
   }
 }
