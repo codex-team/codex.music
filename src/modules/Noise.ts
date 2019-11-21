@@ -87,9 +87,17 @@ export default class Noise {
    */
   private configure(): void {
     this.bufferNode = audioContextManager.getAudioContext().createBufferSource();
+
+    /**
+     * Create buffer for noise
+     * Default buffer size is 2^12 = 4096
+     */
     this.buffer = audioContextManager.getAudioContext().createBuffer(1, 4096, audioContextManager.getAudioContext().sampleRate);
     this.buffersChannelData = this.buffer.getChannelData(0);
 
+    /**
+     * Fill the buffer with noise
+     */
     for (let i = 0; i < 4096; i++) {
       this.buffersChannelData[i] = Math.random() * 2 - 1;
     }
