@@ -76,6 +76,14 @@ class AudioContextManager {
     }
     return this.audioContext.createPeriodicWave(real, imag, constraints);
   }
+
+  /**
+   * Get current time of audio context
+   * @return {Number}
+   */
+  public getCurrentTime(): number {
+    return this.getAudioContext().currentTime;
+  }
 }
 
 export default new AudioContextManager();

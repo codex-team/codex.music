@@ -84,7 +84,7 @@ export default class Noise {
    * Method for starting noise node
    * @param when {Number} - time for starting node (default - audioContext.currentTime)
    */
-  public play(when: number = audioContextManager.getAudioContext().currentTime): void {
+  public play(when: number = audioContextManager.getCurrentTime()): void {
     if (this.isConfigured) {
       this.bufferNode.start(when);
     }
@@ -94,7 +94,7 @@ export default class Noise {
    * Method for stopping noise node
    * @param when {Number} - time for stopping node (default - audioContext.currentTime)
    */
-  public stop(when: number = audioContextManager.getAudioContext().currentTime): void {
+  public stop(when: number = audioContextManager.getCurrentTime()): void {
     if (this.isConfigured) {
       this.bufferNode.stop(when);
     }
