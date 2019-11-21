@@ -34,7 +34,7 @@ class AudioContextManager {
   }
 
   /**
-   * s
+   * create settings of biquadFilter
    * @param biquadFilter
    */
   public createBiquadFilter():void {
