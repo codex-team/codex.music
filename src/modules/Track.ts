@@ -20,6 +20,17 @@ export default class Track {
    * Track status (audio source is already connected with destination)
    */
   private isConfigured = false;
+
+  /**
+   * Constructor for track
+   * @param instrument {Instrument} - chosen musical instrument
+   * @param melody {Melody} - melody to play
+   */
+  public constructor(instrument: Instrument, melody: Melody) {
+    this.instrument = instrument;
+    this.melody = melody;
+  }
+
   /**
    * Method to connect audio source with destination
    */

@@ -34,6 +34,14 @@ class AudioContextManager {
   }
 
   /**
+   * s
+   * @param biquadFilter
+   */
+  public createBiquadFilter():void {
+    const biquadFilter = this.audioContext.createBiquadFilter();
+  }
+
+  /**
    * Method reports if audio context is defined
    * @return {Boolean}
    */

@@ -1,4 +1,6 @@
 import audioContextManager from './AudioContextManager';
+
+import { LowPassFilter } from './filters/filter-lowpass';
 import { MelodyNote } from './Melody';
 
 /**
@@ -39,6 +41,7 @@ export default abstract class Instrument {
    * Volume of instrument
    */
   private readonly volumeNode: GainNode;
+
   /**
    * Represents audio node periodic wave
    */

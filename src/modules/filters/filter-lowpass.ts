@@ -1,4 +1,5 @@
 import Filter from './filter';
+import audioContextManager from "../AudioContextManager";
 
 /**
  * The type property of the BiquadFilterNode interface is a string (enum)
@@ -14,9 +15,10 @@ class LowPassFilter extends Filter {
    *
    * @param filterLowPass - create a ew filter
    */
-  constructor(filterLowPass: BiquadFilterNode) {
-    super();
-    this.filterLowPass.type = 'lowpass';
+  protected setFilterLowPass(filterLowPass: BiquadFilterNode): void {
+    // @ts-ignore
+    this.filterLowPass = audioContextManager.createBiquadFilter();
+    filterLowPass.type = 'lowpass';
     filterLowPass.frequency.value = 100;
   }
 }
