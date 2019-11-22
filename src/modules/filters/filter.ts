@@ -8,36 +8,11 @@ export default abstract class Filter {
    * Node of filter
    */
   protected node: any;
-  // /**
-  //  * create context
-  //  */
-  // protected audioContextManager: AudioContext;
-  // /**
-  //  * d
-  //  */
-  // protected gainNode: any;
-  // /**
-  //  *
-  //  */
-  // protected oscillator: OscillatorNode;
-  //
-  // /**
-  //  * d
-  //  */
-  // protected source: OscillatorNode;
   /**
    * create a new filter
    */
   protected constructor() {
     this.node = audioContextManager.getAudioContext().createBiquadFilter();
-
-    console.log(' this.node', this.node);
-    /*
-     * this.oscillator = this.audioContextManager.createOscillator();
-     * this.gainNode = this.audioContextManager.createGain();
-     * this.oscillator.connect(this.gainNode);
-     * this.gainNode.connect(this.audioContextManager.destination);
-     */
   }
 
   /**
