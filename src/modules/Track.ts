@@ -17,9 +17,9 @@ export default class Track {
   private instrument: Instrument;
 
   /**
-   * Track status (audio source is already connected with destination)
+   * Track status (track is playing or not)
    */
-  private isConfigured = false;
+  private isPlay: number;
 
   /**
    * Constructor for track
@@ -29,23 +29,13 @@ export default class Track {
   public constructor(instrument: Instrument, melody: Melody) {
     this.instrument = instrument;
     this.melody = melody;
-  }
-
-  /**
-   * Method to connect audio source with destination
-   */
-  private configure(): void {
     this.instrument.node.connect(audioContextManager.getAudioContext().destination);
-    this.isConfigured = true;
   }
 
   /**
    * Method to play melody
    */
   public play(): void {
-    if (!this.isConfigured) {
-      this.configure();
-    }
     let timeOffset = audioContextManager.getAudioContext().currentTime;
 
     this.melody.noteList.forEach(
@@ -58,9 +48,24 @@ export default class Track {
   }
 
   /**
+   * Method to play loop melody
+   */
+  public playLoop(): void {
+    const interval = this.melody.noteList.length * (this.melody.defaultLength + 1);
+
+    this.play();
+    this.isPlay = setInterval(() => {
+      this.play();
+    }, interval);
+  }
+
+  /**
    * Method to stop the track's playback
    */
   public stop(): void {
     this.instrument.stop();
+    if (this.isPlay) {
+      clearInterval(this.isPlay);
+    }
   }
 }
