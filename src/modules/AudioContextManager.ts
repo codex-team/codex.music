@@ -84,6 +84,14 @@ class AudioContextManager {
   public get currentTime(): number {
     return this.getAudioContext().currentTime;
   }
+
+  /**
+   * Get audio destination node for audio context
+   * @return {AudioDestinationNode}
+   */
+  public get audioDestination(): AudioDestinationNode {
+    return this.getAudioContext().destination;
+  }
 }
 
 export default new AudioContextManager();
