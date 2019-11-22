@@ -1,5 +1,8 @@
 import audioContextManager from '../modules/AudioContextManager';
-import Noise from '../modules/Noise';
+import Noise from '../modules/noises/Noise';
+import BrownianNoise from '../modules/noises/BrownianNoise';
+import PinkNoise from '../modules/noises/PinkNoise';
+import WhiteNoise from '../modules/noises/WhiteNoise';
 
 /**
  * Class represents Track implementation and Track configuration
@@ -19,7 +22,7 @@ export default class Track {
    * Constructor for track
    */
   public constructor() {
-    this.noise = new Noise(200);
+    this.noise = new WhiteNoise();
   }
 
   /**

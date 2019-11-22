@@ -1,9 +1,9 @@
-import audioContextManager from './AudioContextManager';
+import audioContextManager from '../AudioContextManager';
 
 /**
  * Class represents noise node
  */
-export default class Noise {
+export default abstract class Noise {
   /**
    * Source of noise
    */
@@ -17,7 +17,7 @@ export default class Noise {
   /**
    * Array of frequencies, that creates noise
    */
-  private buffersChannelData: Float32Array;
+  protected buffersChannelData: Float32Array;
 
   /**
    * Noise node status
@@ -89,13 +89,7 @@ export default class Noise {
 
     this.buffer = audioContextManager.getAudioContext().createBuffer(1, bufferSize, audioContextManager.getAudioContext().sampleRate);
     this.buffersChannelData = this.buffer.getChannelData(0);
-
-    /**
-     * Fill the buffer with noise
-     */
-    for (let i = 0; i < bufferSize; i++) {
-      this.buffersChannelData[i] = Math.random() * 2 - 1;
-    }
+    this.fillBufferData(bufferSize);
     this.bufferSourceNode.buffer = this.buffer;
     this.bufferSourceNode.loop = true;
     this.bandpass = audioContextManager.getAudioContext().createBiquadFilter();
@@ -103,4 +97,10 @@ export default class Noise {
     this.bufferSourceNode.start(audioContextManager.currentTime);
     this.isConfigured = true;
   }
+
+  /**
+   * Fill the buffer with noise
+   * @param bufferSize {Number} - size of buffer
+   */
+  protected abstract fillBufferData(bufferSize: number): void;
 }
