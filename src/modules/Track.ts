@@ -1,5 +1,5 @@
 import { Melody, MelodyNote } from './Melody';
-import Instrument from './Instrument';
+import Instrument from './instruments/Instrument';
 import audioContextManager from './AudioContextManager';
 
 /**

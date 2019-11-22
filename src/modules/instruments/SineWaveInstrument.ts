@@ -1,4 +1,4 @@
-import Instrument, { WaveOptions } from '../Instrument';
+import Instrument, { WaveOptions } from './Instrument';
 import { Instruments } from '../../types/instruments';
 
 /**

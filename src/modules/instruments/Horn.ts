@@ -1,8 +1,8 @@
-import Instrument, { WaveOptions } from '../Instrument';
+import Instrument, { WaveOptions } from './Instrument';
 import { Instruments } from '../../types/instruments';
 
 /**
- * Class representing an horn instrument
+ * Class representing a horn instrument
  */
 export default class Horn extends Instrument {
   /**
