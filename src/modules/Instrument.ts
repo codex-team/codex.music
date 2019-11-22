@@ -35,7 +35,7 @@ export default abstract class Instrument {
   /**
    * Audio source node
    */
-  private readonly instrumentSourceNode: OscillatorNode;
+  protected readonly instrumentSourceNode: OscillatorNode;
 
   /**
    * Volume of instrument
@@ -133,4 +133,44 @@ export default abstract class Instrument {
     }
     this.isStarted = true;
   }
+
+  /**
+   * Create a new filter
+   */
+  public filterLowPass: any;
+  /**
+   *
+   */
+  public oscillator: OscillatorNode;
+  /**
+   *
+   */
+  public gainNode: GainNode;
+  /**
+   * f
+   */
+  public source: OscillatorNode;
+  /**
+   * d
+   */
+  private audioContext: AudioContext = new AudioContext();
+  /**
+   *
+   * @param filterLowPass - create a new filter(Low pass)A low-pass filter is a filter that passes signals with a frequency
+   * lower than a selected cutoff frequency and attenuates signals with frequencies higher than the cutoff frequency
+   * @param source
+   */
+  /*
+   * protected setFilterLowPass(filterLowPass: any, source: any): void {
+   *   this.filterLowPass = this.audioContext.createBiquadFilter();
+   *   this.oscillator = this.audioContext.createOscillator();
+   *   this.gainNode = this.audioContext.createGain();
+   *   this.oscillator.connect(this.gainNode);
+   *   this.gainNode.connect(this.audioContext.destination);
+   *   source = this.audioContext.createMediaStreamSource(source);
+   *   filterLowPass.type = 3;
+   *   filterLowPass.frequency.value = 100;
+   *   filterLowPass.frequency.Q = 3;
+   * }
+   */
 }

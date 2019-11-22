@@ -17,7 +17,16 @@ class SineWaveInstrument extends Instrument {
     };
 
     this.setWave(waveOptions);
-    this.setFilterLowPass(filterLowPass);
+    this.setFilterLowPass();
+  }
+
+  /**
+   * Set low pass filter
+   */
+  setFilterLowPass() {
+    const filter = new LowPassFilter();
+
+    filter.connect(this.instrumentSourceNode);
   }
 }
 
