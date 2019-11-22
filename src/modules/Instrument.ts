@@ -1,6 +1,6 @@
 import audioContextManager from './AudioContextManager';
 
-import { LowPassFilter } from './filters/filter-lowpass';
+// import { LowPassFilter } from './filters/filter-lowpass';
 import { MelodyNote } from './Melody';
 
 /**
