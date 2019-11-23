@@ -9,9 +9,13 @@
 Demo application for Codex.Music
 <button id="play">Play</button>
 <button id="stop">Stop</button>
+<div class="vizualizer__wrapper">
+  <canvas width="640" height="360" id="visualizer"></canvas>
+</div>
 
 <script>
   const chilloutaudio = new CodexMusic();
+  chilloutaudio.connectAnalyserToCanvas(document.getElementById('visualizer'));
   document.getElementById('play').onclick = () => {
     chilloutaudio.play();
   };

@@ -10,6 +10,11 @@ class AudioContextManager {
   private audioContext!: AudioContext;
 
   /**
+   * Analyser for AudioContext
+   */
+  private _analyser: AnalyserNode;
+
+  /**
    * Getter for audioContext field
    * If audioContext is empty, getter will create new audio context
    * @return {AudioContext}
@@ -75,6 +80,18 @@ class AudioContextManager {
       this.createAudioContext();
     }
     return this.audioContext.createPeriodicWave(real, imag, constraints);
+  }
+
+  /**
+   * Create analyser for audio context
+   * @return {AnalyzerNode}
+   */
+  public get analyser(): AnalyserNode {
+    if (!this._analyser) {
+      this._analyser = this.getAudioContext().createAnalyser();
+      this._analyser.fftSize = 2048;
+    }
+    return this._analyser;
   }
 }
 
