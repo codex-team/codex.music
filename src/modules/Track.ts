@@ -40,14 +40,27 @@ export default class Track {
   }
 
   /**
-   * Method to play melody
+   * Connect analyzer to instrument
    */
-  public play(): void {
+  public connectAnalyzer(): void {
+    if (this.isConfigured) {
+      this.instrument.node.connect(audioContextManager.analyser);
+    }
+  }
+
+  /**
+   * Method to play melody
+   * @param analyser {Boolean} - true if you need to connect analyser to track
+   */
+  public play(analyser?: boolean): void {
     if (!this.isConfigured) {
       this.configure();
     }
     let timeOffset = audioContextManager.getAudioContext().currentTime;
 
+    if (analyser) {
+      this.connectAnalyzer();
+    }
     this.melody.noteList.forEach(
       (note: MelodyNote) => {
         this.instrument.playNote(note, timeOffset);
