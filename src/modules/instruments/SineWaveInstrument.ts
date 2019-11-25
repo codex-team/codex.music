@@ -1,6 +1,7 @@
 import Instrument, { WaveOptions } from './Instrument';
 import { Instruments } from '../../types/instruments';
 import LowPassFilter from '../filters/LowPassFilter';
+import audioContextManager from '../AudioContextManager';
 
 /**
  * Class representing an instrument periodic wave
@@ -23,10 +24,9 @@ export default class SineWaveInstrument extends Instrument {
   /**
    * Set low pass filter
    */
-  private setFilterLowPass(): void {
-    const filter = new LowPassFilter();
-
-    filter.connect(this.lastNode);
-    this.addNodeToNodeChain(filter.filterNode);
+  setFilterLowPass() {
+    this.filter = new LowPassFilter();
+    this.volumeNode.connect(this.filter.filterNode);
+    this.filter.filterNode.connect(audioContextManager.getAudioContext().destination);
   }
 }
