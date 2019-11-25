@@ -18,10 +18,18 @@ export default abstract class Filter {
   }
 
   /**
-   * Connect filter and instrument
-   * @param target - node for connecting filter
+   * Getter for filter node
+   * @return {BiquadFilterNode}
    */
-  public connect(target: AudioDestinationNode): void {
+  public get filterNode(): BiquadFilterNode {
+    return this.node;
+  }
+
+  /**
+   * Connect filter and instrument
+   * @param target {AudioNode} - node for connecting filter
+   */
+  public connect(target: AudioNode): void {
     target.connect(this.node);
   }
 }

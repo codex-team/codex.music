@@ -22,6 +22,11 @@ export default class Track {
   private isConfigured = false;
 
   /**
+   * Timeout for stopping play instrument
+   */
+  private playTimeout: number;
+
+  /**
    * Constructor for track
    * @param instrument {Instrument} - chosen musical instrument
    * @param melody {Melody} - melody to play
@@ -35,7 +40,7 @@ export default class Track {
    * Method to connect audio source with destination
    */
   private configure(): void {
-    this.instrument.node.connect(audioContextManager.getAudioContext().destination);
+    this.instrument.lastNode.connect(audioContextManager.getAudioContext().destination);
     this.isConfigured = true;
   }
 
@@ -47,20 +52,27 @@ export default class Track {
       this.configure();
     }
     let timeOffset = audioContextManager.getAudioContext().currentTime;
+    let timeoutLength = 0;
 
     this.melody.noteList.forEach(
       (note: MelodyNote) => {
         this.instrument.playNote(note, timeOffset);
         timeOffset += note.length / 1000;
+        timeoutLength += note.length;
       }
     );
-    this.instrument.stop(timeOffset);
+    this.playTimeout = setTimeout(() => {
+      this.instrument.stop();
+    }, timeoutLength);
   }
 
   /**
    * Method to stop the track's playback
    */
   public stop(): void {
+    if (this.playTimeout) {
+      clearTimeout(this.playTimeout);
+    }
     this.instrument.stop();
   }
 }

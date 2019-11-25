@@ -41,6 +41,11 @@ export default abstract class Instrument {
   private readonly volumeNode: GainNode;
 
   /**
+   *
+   */
+  private nodeChain: AudioNode[] = [];
+
+  /**
    * Represents audio node periodic wave
    */
   private waveOptions: WaveOptions = {
@@ -68,13 +73,24 @@ export default abstract class Instrument {
     this.instrumentSourceNode = audioContextManager.createOscillator();
     this.volumeNode = audioContextManager.createGain();
     this.instrumentSourceNode.connect(this.volumeNode);
+    this.addNodeToNodeChain(this.instrumentSourceNode);
+    this.addNodeToNodeChain(this.volumeNode);
   }
 
   /**
-   * Getter for audioNode property
+   * Getter for last audio node property
+   * @return {AudioNode}
    */
-  public get node():AudioNode {
-    return this.volumeNode;
+  public get lastNode(): AudioNode {
+    return this.nodeChain[this.nodeChain.length - 1];
+  }
+
+  /**
+   * Method add audioNode to the end of instrument node chain
+   * @param audioNode {AudioNode} - node for adding
+   */
+  protected addNodeToNodeChain(audioNode: AudioNode): void {
+    this.nodeChain.push(audioNode);
   }
 
   /**
@@ -109,12 +125,10 @@ export default abstract class Instrument {
 
   /**
    * Method to stop instrument's playback
-   * @param when {Number} - time when instrument will stop
    */
   public stop(when: number = audioContextManager.getAudioContext().currentTime): void {
-    this.volumeNode.gain.cancelScheduledValues(when);
-    this.volumeNode.gain.setValueAtTime(0, when);
     this.instrumentSourceNode.frequency.cancelScheduledValues(when);
+    this.lastNode.disconnect();
     this.isStarted = false;
   }
 
@@ -124,8 +138,9 @@ export default abstract class Instrument {
   private start(): void {
     const when = audioContextManager.getAudioContext().currentTime;
 
-    this.volumeNode.gain.setValueAtTime(1, when);
+    this.lastNode.connect(audioContextManager.getAudioContext().destination);
     if (!this.isInstrumentConfigured) {
+      this.volumeNode.gain.setValueAtTime(1, when);
       this.instrumentSourceNode.start(when);
       this.isInstrumentConfigured = true;
     }
