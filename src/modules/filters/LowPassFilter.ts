@@ -1,4 +1,4 @@
-import Filter from './filter';
+import Filter from './Filter';
 
 /**
  * The type property of the BiquadFilterNode interface is a string (enum)
@@ -6,12 +6,11 @@ import Filter from './filter';
  */
 export default class LowPassFilter extends Filter {
   /**
-   * Сreating filter settings
-   * 3 is a type of filter(lowpass)
+   * Creating filter settings
    */
   constructor() {
     super();
-    this.node.type = 3;
+    this.node.type = 'lowpass';
     this.node.frequency.value = 1000;
     this.node.Q.value = 1000;
   }
