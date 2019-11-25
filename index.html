@@ -8,17 +8,12 @@
 <body>
 Demo application for Codex.Music
 <button id="play">Play</button>
-<button id="playLoop">Play loop</button>
 <button id="stop">Stop</button>
 
 <script>
   const chilloutaudio = new CodexMusic();
   document.getElementById('play').onclick = () => {
     chilloutaudio.play();
-  };
-
-  document.getElementById('playLoop').onclick = () => {
-    chilloutaudio.playLoop();
   };
 
   document.getElementById('stop').onclick = () => {

@@ -46,20 +46,11 @@ export default class ChilloutAudio {
   }
 
   /**
-   * Method for start playing melody
+   * Method for start  playing track
    */
   public play(): void {
     if (this.track) {
       this.track.play();
-    }
-  }
-
-  /**
-   * Method for start loop playing melody
-   */
-  public playLoop(): void {
-    if (this.track) {
-      this.track.playLoop();
     }
   }
 

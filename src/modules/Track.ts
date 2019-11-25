@@ -35,7 +35,7 @@ export default class Track {
   /**
    * Method to play melody
    */
-  public play(): void {
+  private playMelody(): void {
     let timeOffset = audioContextManager.getAudioContext().currentTime;
 
     this.melody.noteList.forEach(
@@ -44,19 +44,14 @@ export default class Track {
         timeOffset += note.length / 1000;
       }
     );
-    this.instrument.stop(timeOffset);
   }
 
   /**
-   * Method to play loop melody
+   * Method to play track
    */
-  public playLoop(): void {
-    const interval = this.melody.noteList.length * (this.melody.defaultLength + 1);
-
-    this.play();
-    this.isPlay = setInterval(() => {
-      this.play();
-    }, interval);
+  public play(): void {
+    this.playMelody();
+    this.isPlay = setInterval(() => this.playMelody(), this.melody.durationMelody);
   }
 
   /**
@@ -64,8 +59,6 @@ export default class Track {
    */
   public stop(): void {
     this.instrument.stop();
-    if (this.isPlay) {
-      clearInterval(this.isPlay);
-    }
+    clearInterval(this.isPlay);
   }
 }
