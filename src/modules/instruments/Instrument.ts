@@ -1,7 +1,5 @@
-import audioContextManager from './AudioContextManager';
-
-// import { LowPassFilter } from './filters/filter-lowpass';
-import { MelodyNote } from './Melody';
+import audioContextManager from '../AudioContextManager';
+import { MelodyNote } from '../Melody';
 
 /**
  * Interface represents wave options

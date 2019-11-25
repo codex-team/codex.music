@@ -1,5 +1,5 @@
 import Instrument, { WaveOptions } from './Instrument';
-import { Instruments } from '../types/instruments';
+import { Instruments } from '../../types/instruments';
 import LowPassFilter from './filters/filter-lowpass';
 
 /**
