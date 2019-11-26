@@ -34,12 +34,7 @@ export default abstract class Instrument {
   /**
    * Audio source node
    */
-  protected readonly instrumentSourceNode: OscillatorNode;
-
-  /**
-   * Volume of instrument
-   */
-  protected readonly volumeNode: GainNode;
+  protected readonly oscillatorNode: OscillatorNode;
 
   /**
    * Represents audio node periodic wave
@@ -71,17 +66,15 @@ export default abstract class Instrument {
    */
   protected constructor(name: string) {
     this.name = name;
-    this.instrumentSourceNode = audioContextManager.createOscillator();
-    this.volumeNode = audioContextManager.createGain();
-    this.instrumentSourceNode.connect(this.volumeNode);
+    this.oscillatorNode = audioContextManager.createOscillator();
   }
 
   /**
-   * Getter for last audio node property
+   * Getter for instrument output node
    * @return {AudioNode}
    */
-  public get lastNode(): AudioNode {
-    return this.filter ? this.filter.filterNode : this.volumeNode;
+  public get outputNode(): AudioNode {
+    return this.filter ? this.filter.filterNode : this.oscillatorNode;
   }
 
   /**
@@ -91,7 +84,7 @@ export default abstract class Instrument {
    */
   public playNote(note: MelodyNote, when: number): void {
     if (!this.isStarted) this.start();
-    this.instrumentSourceNode.frequency.setValueAtTime(note.frequency, when);
+    this.oscillatorNode.frequency.setValueAtTime(note.frequency, when);
   }
 
   /**
@@ -111,7 +104,7 @@ export default abstract class Instrument {
       }
     );
 
-    this.instrumentSourceNode.setPeriodicWave(periodicWave);
+    this.oscillatorNode.setPeriodicWave(periodicWave);
   }
 
   /**
@@ -119,9 +112,7 @@ export default abstract class Instrument {
    * @param when {Number} - time when instrument will stop
    */
   public stop(when: number = audioContextManager.getAudioContext().currentTime): void {
-    this.volumeNode.gain.cancelScheduledValues(when);
-    this.volumeNode.gain.setValueAtTime(0, when);
-    this.instrumentSourceNode.frequency.cancelScheduledValues(when);
+    this.oscillatorNode.frequency.cancelScheduledValues(when);
     if (this.filter) {
       this.filter.filterNode.frequency.setValueAtTime(0, when);
     }
@@ -134,9 +125,8 @@ export default abstract class Instrument {
   private start(): void {
     const when = audioContextManager.getAudioContext().currentTime;
 
-    this.volumeNode.gain.setValueAtTime(1, when);
     if (!this.isInstrumentConfigured) {
-      this.instrumentSourceNode.start(when);
+      this.oscillatorNode.start(when);
       this.isInstrumentConfigured = true;
     }
     if (this.filter) {
