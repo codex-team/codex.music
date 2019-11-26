@@ -31,20 +31,14 @@ export default abstract class Noise {
   private currentFrequency: number = 1000;
 
   /**
-   * Destination for noise node
-   */
-  private destination: AudioNode;
-
-  /**
    * Constructor for noise node
    * @param frequency {Number} - noise frequency in hertz
    */
   constructor(frequency?: number) {
     this.configure();
     if (frequency) {
-      this.currentFrequency = frequency;
+      this.setNoiseFrequency(frequency);
     }
-    this.setNoiseFrequency(frequency);
   }
 
   /**
@@ -60,7 +54,7 @@ export default abstract class Noise {
    * Method for starting noise node
    */
   public play(): void {
-    this.connect();
+    this.connect(audioContextManager.audioDestination);
   }
 
   /**
@@ -72,15 +66,10 @@ export default abstract class Noise {
 
   /**
    * Connect noise node to destination
-   * @param newDestination {AudioNode} - new destination for noise node
+   * @param destination {AudioNode} - destination for noise node
    */
-  public connect(newDestination?: AudioNode): void {
-    if (newDestination) {
-      this.destination = newDestination;
-    }
-    if (this.destination) {
-      this.bandpass.filterNode.connect(this.destination);
-    }
+  public connect(destination: AudioNode): void {
+    this.bandpass.filterNode.connect(destination);
   }
 
   /**
