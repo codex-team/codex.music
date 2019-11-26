@@ -24,7 +24,7 @@ export default class ChilloutAudio {
    * @param notes {String} - notes in melody
    * @param instrument {Instruments} - name of instrument
    */
-  public constructor(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.HORN_INSTRUMENT) {
+  public constructor(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.SINE_WAVE_INSTRUMENT) {
     this.tracksManager = new TracksManager();
     const melody = new Melody(notes);
 
