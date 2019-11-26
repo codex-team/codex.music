@@ -22,14 +22,14 @@ export default class Track {
    * Constructor for track
    */
   public constructor() {
-    this.noise = new WhiteNoise();
+    this.noise = new WhiteNoise(100);
   }
 
   /**
    * Method to connect audio source with destination
    */
   private configure(): void {
-    this.noise.connect(audioContextManager.audioDestination);
+    this.noise.noiseDestination = audioContextManager.audioDestination;
     this.isConfigured = true;
   }
 

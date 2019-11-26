@@ -11,7 +11,6 @@ export default class BandPassFilter extends Filter {
   constructor() {
     super();
     this.node.type = 'bandpass';
-    this.node.frequency.value = 440;
-    this.node.Q.value = 1000;
+    this.node.frequency.value = 1000;
   }
 }

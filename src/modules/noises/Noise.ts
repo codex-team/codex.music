@@ -1,4 +1,5 @@
 import audioContextManager from '../AudioContextManager';
+import BandPassFilter from '../filters/BandPassFilter';
 
 /**
  * Class represents noise node
@@ -27,12 +28,17 @@ export default abstract class Noise {
   /**
    * Filter that controls noise frequency
    */
-  private bandpass: BiquadFilterNode;
+  private bandpass: BandPassFilter;
 
   /**
    * Current frequency of noise node
    */
   private currentFrequency: number;
+
+  /**
+   * Destination for noise node
+   */
+  private destination: AudioNode;
 
   /**
    * Constructor for noise node
@@ -48,20 +54,19 @@ export default abstract class Noise {
   }
 
   /**
-   * Connect noise node to audio context destination
+   * Setter for noise destination
    * @param destination {AudioDestinationNode} - audio context destination
    */
-  public connect(destination: AudioDestinationNode): void {
-    this.bufferSourceNode.connect(this.bandpass).connect(destination);
+  public set noiseDestination(destination: AudioDestinationNode) {
+    this.destination = destination;
   }
 
   /**
    * Set frequency of noise in hertz
    * @param frequency {Number} - new frequency in hertz
-   * @param when {Number} - time for set noise frequency (default - audio context current time)
    */
-  public setNoiseFrequency(frequency: number, when: number = audioContextManager.currentTime): void {
-    this.bandpass.frequency.setValueAtTime(frequency, when);
+  public setNoiseFrequency(frequency: number): void {
+    this.bandpass.filterNode.frequency.value = frequency;
     this.currentFrequency = frequency;
   }
 
@@ -69,31 +74,63 @@ export default abstract class Noise {
    * Method for starting noise node
    */
   public play(): void {
-    this.setNoiseFrequency(this.currentFrequency);
+    this.connect();
   }
 
   /**
    * Method for stopping noise node
    */
   public stop(): void {
-    this.bandpass.frequency.setValueAtTime(0, audioContextManager.currentTime);
+    this.disconnect();
+  }
+
+  /**
+   * Connect noise node to destination
+   */
+  private connect(): void {
+    if (this.destination) {
+      this.bandpass.filterNode.connect(this.destination);
+    }
+  }
+
+  /**
+   * Disconnect noise node from destination
+   */
+  private disconnect(): void {
+    this.bandpass.filterNode.disconnect();
   }
 
   /**
    * Configure noise node
    */
   private configure(): void {
-    this.bufferSourceNode = audioContextManager.getAudioContext().createBufferSource();
+    const audioContext = audioContextManager.getAudioContext();
 
-    const bufferSize = 2 * audioContextManager.getAudioContext().sampleRate;
+    /**
+     * Configure buffer
+     */
+    const bufferSize = 2 * audioContext.sampleRate;
 
-    this.buffer = audioContextManager.getAudioContext().createBuffer(1, bufferSize, audioContextManager.getAudioContext().sampleRate);
+    this.buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
     this.buffersChannelData = this.buffer.getChannelData(0);
     this.fillBufferData(bufferSize);
+
+    /**
+     * Configure buffer source node
+     */
+    this.bufferSourceNode = audioContext.createBufferSource();
     this.bufferSourceNode.buffer = this.buffer;
     this.bufferSourceNode.loop = true;
-    this.bandpass = audioContextManager.getAudioContext().createBiquadFilter();
-    this.bandpass.type = 'bandpass';
+
+    /**
+     * Add bandpass filter
+     */
+    this.bandpass = new BandPassFilter();
+    this.bufferSourceNode.connect(this.bandpass.filterNode);
+
+    /**
+     * Finish configuration
+     */
     this.bufferSourceNode.start(audioContextManager.currentTime);
     this.isConfigured = true;
   }
