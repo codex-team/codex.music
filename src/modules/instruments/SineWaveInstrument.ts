@@ -1,10 +1,11 @@
 import Instrument, { WaveOptions } from './Instrument';
-import { Instruments } from '../types/instruments';
+import { Instruments } from '../../types/instruments';
+import LowPassFilter from '../filters/LowPassFilter';
 
 /**
  * Class representing an instrument periodic wave
  */
-class SineWaveInstrument extends Instrument {
+export default class SineWaveInstrument extends Instrument {
   /**
    * Create a periodic wave
    */
@@ -16,7 +17,14 @@ class SineWaveInstrument extends Instrument {
     };
 
     this.setWave(waveOptions);
+    this.setFilterLowPass();
+  }
+
+  /**
+   * Set low pass filter
+   */
+  setFilterLowPass() {
+    this.filter = new LowPassFilter();
+    this.oscillatorNode.connect(this.filter.filterNode);
   }
 }
-
-export default SineWaveInstrument;

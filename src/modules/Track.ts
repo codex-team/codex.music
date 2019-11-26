@@ -1,5 +1,5 @@
 import { Melody, MelodyNote } from './Melody';
-import Instrument from './Instrument';
+import Instrument from './instruments/Instrument';
 import audioContextManager from './AudioContextManager';
 
 /**
@@ -35,7 +35,7 @@ export default class Track {
    * Method to connect audio source with destination
    */
   private configure(): void {
-    this.instrument.node.connect(audioContextManager.getAudioContext().destination);
+    this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
     this.isConfigured = true;
   }
 
