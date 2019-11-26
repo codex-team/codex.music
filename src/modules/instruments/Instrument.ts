@@ -113,9 +113,6 @@ export default abstract class Instrument {
    */
   public stop(when: number = audioContextManager.getAudioContext().currentTime): void {
     this.oscillatorNode.frequency.cancelScheduledValues(when);
-    if (this.filter) {
-      this.filter.filterNode.frequency.setValueAtTime(0, when);
-    }
     this.isStarted = false;
   }
 
@@ -128,9 +125,6 @@ export default abstract class Instrument {
     if (!this.isInstrumentConfigured) {
       this.oscillatorNode.start(when);
       this.isInstrumentConfigured = true;
-    }
-    if (this.filter) {
-      this.filter.filterNode.frequency.value = 1000;
     }
     this.isStarted = true;
   }
