@@ -21,19 +21,14 @@ export default abstract class Noise {
   protected buffersChannelData: Float32Array;
 
   /**
-   * Noise node status
-   */
-  private isConfigured: boolean = false;
-
-  /**
    * Filter that controls noise frequency
    */
   private bandpass: BandPassFilter;
 
   /**
-   * Current frequency of noise node
+   * Current frequency of noise node in hertz
    */
-  private currentFrequency: number;
+  private currentFrequency: number = 1000;
 
   /**
    * Destination for noise node
@@ -47,10 +42,9 @@ export default abstract class Noise {
   constructor(frequency?: number) {
     this.configure();
     if (frequency) {
-      this.setNoiseFrequency(frequency);
-    } else {
-      this.setNoiseFrequency(1000);
+      this.currentFrequency = frequency;
     }
+    this.setNoiseFrequency(frequency);
   }
 
   /**
@@ -108,10 +102,15 @@ export default abstract class Noise {
 
     /**
      * Configure buffer
+     * Buffer has 2x sample rate size for better quality
      */
     const bufferSize = 2 * audioContext.sampleRate;
 
     this.buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+
+    /**
+     * Get data of the channel 0
+     */
     this.buffersChannelData = this.buffer.getChannelData(0);
     this.fillBufferData(bufferSize);
 
@@ -120,10 +119,14 @@ export default abstract class Noise {
      */
     this.bufferSourceNode = audioContext.createBufferSource();
     this.bufferSourceNode.buffer = this.buffer;
+
+    /**
+     * The audio asset must be replayed when the end of the AudioBuffer is reached
+     */
     this.bufferSourceNode.loop = true;
 
     /**
-     * Add bandpass filter
+     * Add bandpass filter for filtering required noise frequency
      */
     this.bandpass = new BandPassFilter();
     this.bufferSourceNode.connect(this.bandpass.filterNode);
@@ -132,7 +135,6 @@ export default abstract class Noise {
      * Finish configuration
      */
     this.bufferSourceNode.start(audioContextManager.currentTime);
-    this.isConfigured = true;
   }
 
   /**
