@@ -29,7 +29,7 @@ export default class Track {
    * Method to connect audio source with destination
    */
   private configure(): void {
-    this.noise.noiseDestination = audioContextManager.audioDestination;
+    this.noise.connect(audioContextManager.audioDestination);
     this.isConfigured = true;
   }
 

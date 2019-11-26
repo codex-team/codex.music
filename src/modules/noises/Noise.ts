@@ -48,14 +48,6 @@ export default abstract class Noise {
   }
 
   /**
-   * Setter for noise destination
-   * @param destination {AudioDestinationNode} - audio context destination
-   */
-  public set noiseDestination(destination: AudioDestinationNode) {
-    this.destination = destination;
-  }
-
-  /**
    * Set frequency of noise in hertz
    * @param frequency {Number} - new frequency in hertz
    */
@@ -80,8 +72,12 @@ export default abstract class Noise {
 
   /**
    * Connect noise node to destination
+   * @param newDestination {AudioNode} - new destination for noise node
    */
-  private connect(): void {
+  public connect(newDestination?: AudioNode): void {
+    if (newDestination) {
+      this.destination = newDestination;
+    }
     if (this.destination) {
       this.bandpass.filterNode.connect(this.destination);
     }
