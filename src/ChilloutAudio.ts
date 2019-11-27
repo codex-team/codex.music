@@ -7,20 +7,24 @@ import { Instruments } from './types/instruments';
 export default class ChilloutAudio {
   /**
    * Create new track
-   * @param melodyNotes {String} - string of notes in melody
-   * @param interval {Number} - interval between repeat
-   * @param instrumentName {Instruments} - name of instrument for track
+   * @param melody {string} - string of notes in melody
+   * @param interval {number} - interval between repeat
+   * @param instrument {Instruments} - name of instrument for track
+   *
+   * @todo return track id
    */
-  public addTrack({ melodyNotes, interval, instrumentName }:{ melodyNotes: string, interval:number, instrumentName: Instruments }): void {
+  public addTrack({ melody, interval, instrument }:{ melody: string, interval:number, instrument: Instruments }): void {
     tracksManager.addTrack({
-      melodyNotes,
+      melodyNotes: melody,
       interval,
-      instrumentName
+      instrumentName: instrument
     });
   }
 
   /**
    * Method for start playing tracks
+   *
+   * @todo add track id as an optional parameter
    */
   public play(): void {
     tracksManager.playAll();
@@ -28,6 +32,8 @@ export default class ChilloutAudio {
 
   /**
    * Method for stop playing tracks
+   *
+   * @todo add track id as an optional parameter
    */
   public stop(): void {
     tracksManager.stopAll();
