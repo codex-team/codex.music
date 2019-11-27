@@ -29,7 +29,7 @@ export default class Track {
   public constructor(instrument: Instrument, melody: Melody) {
     this.instrument = instrument;
     this.melody = melody;
-    this.instrument.node.connect(audioContextManager.getAudioContext().destination);
+    this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
   }
 
   /**
