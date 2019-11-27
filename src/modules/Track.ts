@@ -17,9 +17,9 @@ export default class Track {
   private instrument: Instrument;
 
   /**
-   * Track status (track is playing or not)
+   * Playing interval number
    */
-  private isPlay: number;
+  private interval: number;
 
   /**
    * Constructor for track
@@ -51,7 +51,7 @@ export default class Track {
    */
   public play(): void {
     this.playMelody();
-    this.isPlay = setInterval(() => this.playMelody(), this.melody.durationMelody);
+    this.interval = setInterval(() => this.playMelody(), this.melody.duration);
   }
 
   /**
@@ -59,6 +59,6 @@ export default class Track {
    */
   public stop(): void {
     this.instrument.stop();
-    clearInterval(this.isPlay);
+    clearInterval(this.interval);
   }
 }
