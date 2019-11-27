@@ -1,8 +1,4 @@
-import TracksManager from './modules/TracksManager';
-import Track from './modules/Track';
-import SineWaveInstrument from './modules/instruments/SineWaveInstrument';
-import HornInstrument from './modules/instruments/Horn';
-import { Melody } from './modules/Melody';
+import tracksManager from './modules/TracksManager';
 import { Instruments } from './types/instruments';
 
 /**
@@ -10,56 +6,30 @@ import { Instruments } from './types/instruments';
  */
 export default class ChilloutAudio {
   /**
-   * TracksManager Field providing tracks' playback management and configuration
+   * Create new track
+   * @param melodyNotes {String} - string of notes in melody
+   * @param interval {Number} - interval between repeat
+   * @param instrumentName {Instruments} - name of instrument for track
    */
-  private tracksManager: TracksManager;
-
-  /**
-   * Field represents track
-   */
-  private track: Track | undefined;
-
-  /**
-   * Initialises application
-   * @param notes {String} - notes in melody
-   * @param instrument {Instruments} - name of instrument
-   */
-  public constructor(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.SINE_WAVE_INSTRUMENT) {
-    this.tracksManager = new TracksManager();
-    const melody = new Melody(notes);
-
-    switch (instrument) {
-      case Instruments.SINE_WAVE_INSTRUMENT:
-        this.track = new Track(new SineWaveInstrument(), melody);
-        break;
-      case Instruments.HORN_INSTRUMENT:
-        this.track = new Track(new HornInstrument(), melody);
-        break;
-    }
+  public addTrack({ melodyNotes, interval, instrumentName }:{ melodyNotes: string, interval:number, instrumentName: Instruments }): void {
+    tracksManager.addTrack({
+      melodyNotes,
+      interval,
+      instrumentName
+    });
   }
 
   /**
-   * Removes tracks' manager from memory
-   */
-  public destroy(): void {
-    delete this.tracksManager;
-  }
-
-  /**
-   * Method for start playing melody
+   * Method for start playing tracks
    */
   public play(): void {
-    if (this.track) {
-      this.track.play();
-    }
+    tracksManager.playAll();
   }
 
   /**
-   * Method for stop playing melody
+   * Method for stop playing tracks
    */
   public stop(): void {
-    if (this.track) {
-      this.track.stop();
-    }
+    tracksManager.stopAll();
   }
 }
