@@ -1,7 +1,4 @@
-import TracksManager from './modules/TracksManager';
-import Track from './modules/Track';
-import SineWaveInstrument from './modules/SineWaveInstrument';
-import { Melody } from './modules/Melody';
+import tracksManager from './modules/TracksManager';
 import { Instruments } from './types/instruments';
 
 /**
@@ -9,53 +6,41 @@ import { Instruments } from './types/instruments';
  */
 export default class ChilloutAudio {
   /**
-   * TracksManager Field providing tracks' playback management and configuration
+   * Create new track
+   * @param melody {string} - string of notes in melody
+   * @param interval {number} - interval between repeat
+   * @param instrument {Instruments} - name of instrument for track
+   * @return {Number} - index of new track
    */
-  private tracksManager: TracksManager;
+  public addTrack({ melody, interval, instrument }: { melody: string, interval: number, instrument: Instruments }): number {
+    return tracksManager.addTrack({
+      melodyNotes: melody,
+      interval,
+      instrumentName: instrument
+    });
+  }
 
   /**
-   * Field represents track
+   * Method for start playing tracks
+   * @param trackId {Number} - if there is this parameter, track manager play track with this id
    */
-  private track: Track | undefined;
-
-  /**
-   * Initialises application
-   * @param notes {String} - notes in melody
-   * @param instrument {Instruments} - name of instrument
-   */
-  public constructor(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.SINE_WAVE_INSTRUMENT) {
-    this.tracksManager = new TracksManager();
-    const melody = new Melody(notes);
-
-    switch (instrument) {
-      case Instruments.SINE_WAVE_INSTRUMENT:
-        this.track = new Track(new SineWaveInstrument(), melody);
-        break;
+  public play(trackId?: number): void {
+    if (trackId) {
+      tracksManager.playTrackById(trackId);
+    } else {
+      tracksManager.playAll();
     }
   }
 
   /**
-   * Removes tracks' manager from memory
+   * Method for stop playing tracks
+   * @param trackId {Number} - if there is this parameter, track manager stop track with this id
    */
-  public destroy(): void {
-    delete this.tracksManager;
-  }
-
-  /**
-   * Method for start playing melody
-   */
-  public play(): void {
-    if (this.track) {
-      this.track.play();
-    }
-  }
-
-  /**
-   * Method for stop playing melody
-   */
-  public stop(): void {
-    if (this.track) {
-      this.track.stop();
+  public stop(trackId?: number): void {
+    if (trackId) {
+      tracksManager.stopTrackById(trackId);
+    } else {
+      tracksManager.stopAll();
     }
   }
 }
