@@ -46,7 +46,6 @@ export default class Track {
     this.melody = melody;
     this.gainNode = audioContextManager.createGain();
     this.gainNode.gain.value = volume;
-    this.instrument.outputNode.connect(this.gainNode);
     this.gainNode.connect(audioContextManager.getAudioContext().destination);
   }
 
@@ -76,7 +75,7 @@ export default class Track {
    * Method to play track
    */
   public play(): void {
-    this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
+    this.instrument.outputNode.connect(this.gainNode);
     this.playMelody();
     this.interval = setInterval(() => this.playMelody(), this.melody.duration);
   }
