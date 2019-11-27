@@ -4,21 +4,179 @@
   <meta charset="UTF-8">
   <title>CodeX.Music</title>
   <script src="dist/index.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      line-height: 1.5em;
+      margin: 0;
+      padding: 50px;
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      display: inline-block;
+      background: #eee;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    fieldset {
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.11), 0 16px 10px -10px rgba(0, 0, 0, 0.08);
+      border-radius: 7px;
+      border: 0;
+    }
+
+    table:empty::before {
+      content: 'No Tracks added';
+      color: #888;
+      background: #eee;
+      display: block;
+      border-radius: 7px;
+      padding: 10px 25px
+    }
+
+    table:empty + button {
+      display: none;
+    }
+
+    td {
+      padding: 5px 0;
+    }
+  </style>
 </head>
 <body>
-Demo application for Codex.Music
-<button id="play">Play</button>
-<button id="stop">Stop</button>
+  <header>
+    <h1>
+      CodeX Music
+    </h1>
+    Dehumanised engine for generating Chillout music
+  </header>
+  <table cellpadding="0" cellspacing="0" width="100%" vspace="50" id="tracks"></table>
+
+  <button onclick="playAll(this)" style="margin-bottom: 50px">
+    Play All
+  </button>
+
+  <fieldset style="padding: 25px">
+    <h3 style="margin: 0">
+      Add track
+    </h3>
+    <table cellpadding="0" cellspacing="0" width="100%" vspace="16">
+      <tr>
+        <td>
+          Instrument
+          <select id="instrument">
+            <option value="SineWave">Sine wave</option>
+            <option value="Horn">Horn</option>
+          </select>
+        </td>
+        <td>
+          Melody
+          <input id="melody" placeholder="A4 E4 F4" required>
+        </td>
+        <td>
+          Interval, sec
+          <input id="interval" placeholder="2" required>
+        </td>
+        <td>
+          Volume, %
+          <input id="volume" type="range">
+        </td>
+        <td>
+          Effect
+          <select></select>
+        </td>
+      </tr>
+    </table>
+    <button onclick="addTrack()">Add</button>
+  </fieldset>
 
 <script>
-  const chilloutaudio = new CodexMusic();
-  document.getElementById('play').onclick = () => {
-    chilloutaudio.play();
-  };
+  const music = new CodexMusic();
+  const $ = (id) => document.getElementById(id);
 
-  document.getElementById('stop').onclick = () => {
-    chilloutaudio.stop();
-  };
+  function addTrack(){
+    const instrument = $('instrument');
+    const melody = $('melody');
+    const interval = $('interval');
+
+    const trackId = music.addTrack({
+      instrument: instrument.value,
+      melody: melody.value,
+      interval: interval.value,
+    });
+
+    const track = `
+      <tr>
+        <td>
+          <button id="play" onclick="playTrack('${trackId}')">Play</button>
+          <button id="stop" onclick="stopTrack('${trackId}')">Stop</button>
+        </td>
+        <td>
+          Instrument
+          <span class="value">
+            ${instrument.value}
+          </span>
+        </td>
+        <td>
+          Melody
+          <span class="value">
+            ${melody.value}
+          </span>
+        </td>
+        <td>
+          Interval
+          <span class="value">
+            ${interval.value} sec
+          </span>
+        </td>
+        <td>
+          Volume
+          <span class="value">
+            ${volume.value} %
+          </span>
+        </td>
+        <td>
+          Effect
+          <span class="value">
+            —
+          </span>
+        </td>
+      </tr>
+    `;
+
+    $('tracks').insertAdjacentHTML('beforeend', track);
+
+    melody.value = '';
+    interval.value = '';
+  }
+
+  function playTrack(id){
+    alert('Play track: ', id);
+  }
+
+  function stopTrack(id){
+    alert('Stop track: ', id);
+  }
+
+  function playAll(button){
+    const isPlaying = button.dataset.plying === 'true';
+
+    if (!isPlaying){
+      music.play();
+      button.textContent = 'Stop all';
+    } else {
+      music.stop();
+      button.textContent = 'Play all';
+    }
+
+    button.dataset.plying = !isPlaying;
+  }
 </script>
 </body>
 </html>
