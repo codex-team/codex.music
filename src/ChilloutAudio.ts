@@ -1,8 +1,4 @@
-import TracksManager from './modules/TracksManager';
-import Track from './modules/Track';
-import SineWaveInstrument from './modules/instruments/SineWaveInstrument';
-import HornInstrument from './modules/instruments/Horn';
-import { Melody } from './modules/Melody';
+import tracksManager from './modules/TracksManager';
 import { Instruments } from './types/instruments';
 
 /**
@@ -10,66 +6,37 @@ import { Instruments } from './types/instruments';
  */
 export default class ChilloutAudio {
   /**
-   * TracksManager Field providing tracks' playback management and configuration
+   * Create new track
+   * @param melody {string} - string of notes in melody
+   * @param interval {number} - interval between repeat
+   * @param instrument {Instruments} - name of instrument for track
+   *
+   * @todo return track id
    */
-  private tracksManager: TracksManager;
-
-  /**
-   * Field represents track
-   */
-  private track: Track | undefined;
-
-  /**
-   * Initialises application
-   * @param notes {String} - notes in melody
-   * @param instrument {Instruments} - name of instrument
-   */
-  public constructor(notes: string = 'A4 A5 D3 E4', instrument: Instruments = Instruments.SINE_WAVE_INSTRUMENT) {
-    this.tracksManager = new TracksManager();
-    const melody = new Melody(notes);
-
-    switch (instrument) {
-      case Instruments.SINE_WAVE_INSTRUMENT:
-        this.track = new Track(new SineWaveInstrument(), melody);
-        break;
-      case Instruments.HORN_INSTRUMENT:
-        this.track = new Track(new HornInstrument(), melody);
-        break;
-    }
+  public addTrack({ melody, interval, instrument }:{ melody: string, interval:number, instrument: Instruments }): void {
+    tracksManager.addTrack({
+      melodyNotes: melody,
+      interval,
+      instrumentName: instrument
+    });
   }
 
   /**
-   * Removes tracks' manager from memory
-   */
-  public destroy(): void {
-    delete this.tracksManager;
-  }
-
-  /**
-   * Method for start playing track
+   * Method for start playing tracks
+   *
+   * @todo add track id as an optional parameter
    */
   public play(): void {
-    if (this.track) {
-      this.track.play();
-    }
-  }
-
-  /**
-   * Method to set track volume
-   * @param volume {Number} - track volume [0..1]
-   */
-  public setVolume(volume: number): void {
-    if (this.track) {
-      this.track.setVolume(volume);
-    }
+    tracksManager.playAll();
   }
 
   /**
    * Method for stop playing melody
+   * Method for stop playing tracks
+   *
+   * @todo add track id as an optional parameter
    */
   public stop(): void {
-    if (this.track) {
-      this.track.stop();
-    }
+    tracksManager.stopAll();
   }
 }
