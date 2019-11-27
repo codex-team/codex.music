@@ -74,7 +74,7 @@ export default abstract class Instrument {
    * @return {AudioNode}
    */
   public get outputNode(): AudioNode {
-    return this.filter ? this.filter.filterNode : this.oscillatorNode;
+    return this.oscillatorNode;
   }
 
   /**

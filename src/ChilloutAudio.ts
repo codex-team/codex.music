@@ -55,6 +55,16 @@ export default class ChilloutAudio {
   }
 
   /**
+   * Method to set track volume
+   * @param volume {Number} - track volume [0..1]
+   */
+  public setVolume(volume: number): void {
+    if (this.track) {
+      this.track.setVolume(volume);
+    }
+  }
+
+  /**
    * Method for stop playing melody
    */
   public stop(): void {

@@ -17,6 +17,11 @@ export default class Track {
   private instrument: Instrument;
 
   /**
+   * Audio gain node
+   */
+  protected readonly gainNode: GainNode;
+
+  /**
    * Playing interval number
    */
   private interval: number;
@@ -29,7 +34,9 @@ export default class Track {
   public constructor(instrument: Instrument, melody: Melody) {
     this.instrument = instrument;
     this.melody = melody;
-    this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
+    this.gainNode = audioContextManager.createGain();
+    this.instrument.outputNode.connect(this.gainNode);
+    this.gainNode.connect(audioContextManager.getAudioContext().destination);
   }
 
   /**
@@ -47,6 +54,14 @@ export default class Track {
   }
 
   /**
+   * Method to set track volume
+   * @param volume {Number} - track volume [0..1]
+   */
+  public setVolume(volume: number): void {
+    this.gainNode.gain.value = volume;
+  }
+
+  /**
    * Method to play track
    */
   public play(): void {
@@ -58,6 +73,8 @@ export default class Track {
    * Method to stop the track's playback
    */
   public stop(): void {
+    this.gainNode.gain.cancelScheduledValues(0);
+    this.gainNode.gain.setValueAtTime(0, 0);
     this.instrument.stop();
     clearInterval(this.interval);
   }
