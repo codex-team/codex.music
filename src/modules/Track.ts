@@ -29,7 +29,6 @@ export default class Track {
   public constructor(instrument: Instrument, melody: Melody) {
     this.instrument = instrument;
     this.melody = melody;
-    this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
   }
 
   /**
@@ -50,6 +49,7 @@ export default class Track {
    * Method to play track
    */
   public play(): void {
+    this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
     this.playMelody();
     this.interval = setInterval(() => this.playMelody(), this.melody.duration);
   }
@@ -58,6 +58,7 @@ export default class Track {
    * Method to stop the track's playback
    */
   public stop(): void {
+    this.instrument.outputNode.disconnect();
     this.instrument.stop();
     clearInterval(this.interval);
   }
