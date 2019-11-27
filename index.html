@@ -85,7 +85,7 @@
         </td>
         <td>
           Volume, %
-          <input id="volume" type="range">
+          <input id="volume" type="range" min="0" max="1" step="0.01">
         </td>
         <td>
           Effect
@@ -104,11 +104,12 @@
     const instrument = $('instrument');
     const melody = $('melody');
     const interval = $('interval');
-
+    const volume = $('volume');
     const trackId = music.addTrack({
       instrument: instrument.value,
       melody: melody.value,
       interval: interval.value,
+      volume: volume.value,
     });
 
     const track = `
@@ -137,6 +138,7 @@
         </td>
         <td>
           Volume
+          <input id="new_volume" type="range" min="0" max="1" step="0.01" oninput="changeVolume('${trackId}')">
           <span class="value">
             ${volume.value} %
           </span>
@@ -154,6 +156,11 @@
 
     melody.value = '';
     interval.value = '';
+  }
+
+  function changeVolume(id) {
+    console.log(new_volume.value);
+    music.changeTrackVolume(id, new_volume.value);
   }
 
   function playTrack(id){

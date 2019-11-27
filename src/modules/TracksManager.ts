@@ -19,9 +19,10 @@ class TracksManager {
    * @param melodyNotes {String} - string of notes in melody
    * @param interval {Number} - interval between repeat
    * @param instrumentName {Instruments} - name of instrument for track
+   * @param volume {Number} - volume for track [0..1]
    * @return {Number} - index of new track
    */
-  public addTrack({ melodyNotes, interval, instrumentName }:{ melodyNotes: string, interval:number, instrumentName: Instruments }): number {
+  public addTrack({ melodyNotes, interval, instrumentName, volume }:{ melodyNotes: string, interval: number, instrumentName: Instruments, volume: number }): number {
     let instrument: Instrument;
 
     switch (instrumentName) {
@@ -33,7 +34,7 @@ class TracksManager {
         break;
     }
     const melody = new Melody(melodyNotes);
-    const track = new Track(instrument, melody);
+    const track = new Track(instrument, melody, volume);
 
     this.tracks.push(track);
     return this.tracks.indexOf(track);
@@ -71,6 +72,15 @@ class TracksManager {
    */
   public stopTrackById(id: number): void {
     this.tracks[id].stop();
+  }
+
+  /**
+   * Play track with id in argument
+   * @param id {Number} - id of track
+   * @param volume {volume} - track volume
+   */
+  public changeVolumeById(id: number, volume: number): void {
+    this.tracks[id].changeVolume = volume;
   }
 }
 

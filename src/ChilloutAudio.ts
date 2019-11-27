@@ -10,13 +10,16 @@ export default class ChilloutAudio {
    * @param melody {string} - string of notes in melody
    * @param interval {number} - interval between repeat
    * @param instrument {Instruments} - name of instrument for track
+   * @param volume {Number} - volume for track [0..1]
    * @return {Number} - index of new track
    */
-  public addTrack({ melody, interval, instrument }: { melody: string, interval: number, instrument: Instruments }): number {
+  public addTrack({ melody, interval, instrument, volume }: { melody: string, interval: number, instrument: Instruments, volume: number }): number {
+    console.log(volume);
     return tracksManager.addTrack({
       melodyNotes: melody,
       interval,
-      instrumentName: instrument
+      instrumentName: instrument,
+      volume
     });
   }
 
@@ -42,5 +45,14 @@ export default class ChilloutAudio {
     } else {
       tracksManager.stopAll();
     }
+  }
+
+  /**
+   * Play track with id in argument
+   * @param trackId {Number} - id of track
+   * @param volume {volume} - track volume
+   */
+  public changeTrackVolume(trackId: number, volume: number): void {
+    tracksManager.changeVolumeById(trackId, volume);
   }
 }

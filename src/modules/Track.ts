@@ -22,6 +22,15 @@ export default class Track {
   protected readonly gainNode: GainNode;
 
   /**
+   * Setter for track volume
+   * @param volume {Number} - track volume [0..1]
+   * @return {Number} duration of melody
+   */
+  public set changeVolume(volume: number) {
+    this.gainNode.gain.value = volume;
+  }
+
+  /**
    * Playing interval number
    */
   private interval: number;
@@ -30,11 +39,13 @@ export default class Track {
    * Constructor for track
    * @param instrument {Instrument} - chosen musical instrument
    * @param melody {Melody} - melody to play
+   * @param volume {Number} - track volume [0..1]
    */
-  public constructor(instrument: Instrument, melody: Melody) {
+  public constructor(instrument: Instrument, melody: Melody, volume: number) {
     this.instrument = instrument;
     this.melody = melody;
     this.gainNode = audioContextManager.createGain();
+    this.gainNode.gain.value = volume;
     this.instrument.outputNode.connect(this.gainNode);
     this.gainNode.connect(audioContextManager.getAudioContext().destination);
   }
