@@ -46,7 +46,7 @@ export default class ChilloutAudio {
   }
 
   /**
-   * Method for start playing melody
+   * Method for start playing track
    */
   public play(): void {
     if (this.track) {

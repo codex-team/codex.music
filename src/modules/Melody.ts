@@ -64,6 +64,14 @@ export class Melody {
   }
 
   /**
+   * Getter for duration melody
+   * @return {Number} duration of melody
+   */
+  public get duration(): number {
+    return this.noteList.reduce((length: number, note: MelodyNote) => length + note.length, 0);
+  }
+
+  /**
    * Setter for melody default length
    * @param {Number} defaultLength - default note length in milliseconds
    */
