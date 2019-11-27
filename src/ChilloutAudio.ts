@@ -10,11 +10,10 @@ export default class ChilloutAudio {
    * @param melody {string} - string of notes in melody
    * @param interval {number} - interval between repeat
    * @param instrument {Instruments} - name of instrument for track
-   *
-   * @todo return track id
+   * @return {Number} - index of new track
    */
-  public addTrack({ melody, interval, instrument }:{ melody: string, interval:number, instrument: Instruments }): void {
-    tracksManager.addTrack({
+  public addTrack({ melody, interval, instrument }: { melody: string, interval: number, instrument: Instruments }): number {
+    return tracksManager.addTrack({
       melodyNotes: melody,
       interval,
       instrumentName: instrument
@@ -23,19 +22,25 @@ export default class ChilloutAudio {
 
   /**
    * Method for start playing tracks
-   *
-   * @todo add track id as an optional parameter
+   * @param trackId {Number} - if there is this parameter, track manager play track with this id
    */
-  public play(): void {
-    tracksManager.playAll();
+  public play(trackId?: number): void {
+    if (trackId) {
+      tracksManager.playTrackById(trackId);
+    } else {
+      tracksManager.playAll();
+    }
   }
 
   /**
    * Method for stop playing tracks
-   *
-   * @todo add track id as an optional parameter
+   * @param trackId {Number} - if there is this parameter, track manager stop track with this id
    */
-  public stop(): void {
-    tracksManager.stopAll();
+  public stop(trackId?: number): void {
+    if (trackId) {
+      tracksManager.stopTrackById(trackId);
+    } else {
+      tracksManager.stopAll();
+    }
   }
 }

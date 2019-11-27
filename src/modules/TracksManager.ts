@@ -19,8 +19,9 @@ class TracksManager {
    * @param melodyNotes {String} - string of notes in melody
    * @param interval {Number} - interval between repeat
    * @param instrumentName {Instruments} - name of instrument for track
+   * @return {Number} - index of new track
    */
-  public addTrack({ melodyNotes, interval, instrumentName }:{ melodyNotes: string, interval:number, instrumentName: Instruments }): void {
+  public addTrack({ melodyNotes, interval, instrumentName }:{ melodyNotes: string, interval:number, instrumentName: Instruments }): number {
     let instrument: Instrument;
 
     switch (instrumentName) {
@@ -35,6 +36,7 @@ class TracksManager {
     const track = new Track(instrument, melody);
 
     this.tracks.push(track);
+    return this.tracks.indexOf(track);
   }
 
   /**
@@ -47,12 +49,28 @@ class TracksManager {
   }
 
   /**
+   * Play track with id in argument
+   * @param id {Number} - id of track
+   */
+  public playTrackById(id: number): void {
+    this.tracks[id].play();
+  }
+
+  /**
    * Stop all tracks in tracks manager
    */
   public stopAll(): void {
     this.tracks.map((track) => {
       track.stop();
     });
+  }
+
+  /**
+   * Stop track with id in argument
+   * @param id {Number} - id of track
+   */
+  public stopTrackById(id: number): void {
+    this.tracks[id].stop();
   }
 }
 
