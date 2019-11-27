@@ -17,9 +17,9 @@ export default class Track {
   private instrument: Instrument;
 
   /**
-   * Track status (audio source is already connected with destination)
+   * Playing interval number
    */
-  private isConfigured = false;
+  private interval: number;
 
   /**
    * Constructor for track
@@ -29,23 +29,13 @@ export default class Track {
   public constructor(instrument: Instrument, melody: Melody) {
     this.instrument = instrument;
     this.melody = melody;
-  }
-
-  /**
-   * Method to connect audio source with destination
-   */
-  private configure(): void {
     this.instrument.outputNode.connect(audioContextManager.getAudioContext().destination);
-    this.isConfigured = true;
   }
 
   /**
    * Method to play melody
    */
-  public play(): void {
-    if (!this.isConfigured) {
-      this.configure();
-    }
+  private playMelody(): void {
     let timeOffset = audioContextManager.getAudioContext().currentTime;
 
     this.melody.noteList.forEach(
@@ -54,7 +44,14 @@ export default class Track {
         timeOffset += note.length / 1000;
       }
     );
-    this.instrument.stop(timeOffset);
+  }
+
+  /**
+   * Method to play track
+   */
+  public play(): void {
+    this.playMelody();
+    this.interval = setInterval(() => this.playMelody(), this.melody.duration);
   }
 
   /**
@@ -62,5 +59,6 @@ export default class Track {
    */
   public stop(): void {
     this.instrument.stop();
+    clearInterval(this.interval);
   }
 }
