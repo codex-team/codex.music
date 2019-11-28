@@ -19,7 +19,7 @@ export default class Track {
   /**
    * Audio gain node
    */
-  protected readonly gainNode: GainNode;
+  private gainNode: GainNode;
 
   /**
    * Setter for track volume

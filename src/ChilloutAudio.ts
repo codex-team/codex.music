@@ -14,7 +14,6 @@ export default class ChilloutAudio {
    * @return {Number} - index of new track
    */
   public addTrack({ melody, interval, instrument, volume }: { melody: string, interval: number, instrument: Instruments, volume: number }): number {
-    console.log(volume);
     return tracksManager.addTrack({
       melodyNotes: melody,
       interval,
