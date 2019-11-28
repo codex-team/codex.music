@@ -79,8 +79,8 @@ export default abstract class Instrument {
 
   /**
    * Method to play note
-   * @param note {MelodyNote} - note object like MelodyNote
-   * @param when {Number} - time when instrument will play note
+   * @param {MelodyNote} note - note object like MelodyNote
+   * @param {Number} when - time when instrument will play note
    */
   public playNote(note: MelodyNote, when: number): void {
     if (!this.isStarted) this.start();
@@ -89,7 +89,7 @@ export default abstract class Instrument {
 
   /**
    * Setter method for wave type of instrument's audio node
-   * @param newWaveOptions {WaveOptions} - new wave options except base wave options
+   * @param {WaveOptions} newWaveOptions - new wave options except base wave options
    */
   protected setWave(newWaveOptions: WaveOptions): void {
     this.waveOptions = {
@@ -109,7 +109,7 @@ export default abstract class Instrument {
 
   /**
    * Method to stop instrument's playback
-   * @param when {Number} - time when instrument will stop
+   * @param {Number} when - time when instrument will stop
    */
   public stop(when: number = audioContextManager.getAudioContext().currentTime): void {
     this.oscillatorNode.frequency.cancelScheduledValues(when);

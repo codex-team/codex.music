@@ -16,10 +16,10 @@ class TracksManager {
 
   /**
    * Create new track
-   * @param melodyNotes {String} - string of notes in melody
-   * @param interval {Number} - interval between repeat
-   * @param instrumentName {Instruments} - name of instrument for track
-   * @param volume {Number} - volume for track [0..1]
+   * @param {String} melodyNotes - string of notes in melody
+   * @param {Number} interval - interval between repeat
+   * @param {Instruments} instrumentName - name of instrument for track
+   * @param {Number} volume - volume for track [0..1]
    * @return {Number} - index of new track
    */
   public addTrack({ melodyNotes, interval, instrumentName, volume }:{ melodyNotes: string, interval: number, instrumentName: Instruments, volume: number }): number {
@@ -51,7 +51,7 @@ class TracksManager {
 
   /**
    * Play track with id in argument
-   * @param id {Number} - id of track
+   * @param {Number} id - id of track
    */
   public playTrackById(id: number): void {
     this.tracks[id].play();
@@ -68,7 +68,7 @@ class TracksManager {
 
   /**
    * Stop track with id in argument
-   * @param id {Number} - id of track
+   * @param {Number} id - id of track
    */
   public stopTrackById(id: number): void {
     this.tracks[id].stop();
@@ -76,8 +76,8 @@ class TracksManager {
 
   /**
    * Play track with id in argument
-   * @param id {Number} - id of track
-   * @param volume {volume} - track volume
+   * @param {Number} id - id of track
+   * @param {volume} volume - track volume
    */
   public changeVolumeById(id: number, volume: number): void {
     this.tracks[id].changeVolume = volume;

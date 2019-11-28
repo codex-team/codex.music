@@ -23,7 +23,7 @@ export default class Track {
 
   /**
    * Setter for track volume
-   * @param volume {Number} - track volume [0..1]
+   * @param {Number} volume - track volume [0..1]
    * @return {Number} duration of melody
    */
   public set changeVolume(volume: number) {
@@ -37,9 +37,9 @@ export default class Track {
 
   /**
    * Constructor for track
-   * @param instrument {Instrument} - chosen musical instrument
-   * @param melody {Melody} - melody to play
-   * @param volume {Number} - track volume [0..1]
+   * @param {Instrument} instrument - chosen musical instrument
+   * @param {Melody} melody - melody to play
+   * @param {Number} volume - track volume [0..1]
    */
   public constructor(instrument: Instrument, melody: Melody, volume: number) {
     this.instrument = instrument;
