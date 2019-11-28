@@ -27,7 +27,7 @@ export default abstract class Filter {
 
   /**
    * Connect filter and instrument
-   * @param target {AudioNode} - node for connecting filter
+   * @param {AudioNode} target - node for connecting filter
    */
   public connect(target: AudioNode): void {
     target.connect(this.node);
