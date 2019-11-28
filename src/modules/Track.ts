@@ -64,14 +64,6 @@ export default class Track {
   }
 
   /**
-   * Method to set track volume
-   * @param volume {Number} - track volume [0..1]
-   */
-  public setVolume(volume: number): void {
-    this.gainNode.gain.value = volume;
-  }
-
-  /**
    * Method to play track
    */
   public play(): void {
